@@ -14,7 +14,7 @@ add_action( 'girl_header', function() {
     * @since 1.0
     * @author Trangfox
     */
-    echo '<div id="wallpraper" class="girl-container flex">';
+    echo '<div id="wallpraper" class="girl-container">';
 } );
 add_action( 'girl_header', function() {
     /**
@@ -28,9 +28,12 @@ add_action( 'girl_header', function() {
     } else {
         $container = 'div';
     }
-    $out = '<'.$container.' class="">';
+    $out  = '<div id="header-cover">';
+    $out .= '<figure class="cover-logo"><img src="'.get_template_directory_uri().'/assets/img/cover-avatar.jpg" alt="Sexy Girl Xiuren Photo 18+"/></figure>';
+    $out .= '<'.$container.' class="bg-header bg-logo">';
     $out .= 'Trangfox.com';
     $out .= '</'.$container.'>';
+    $out .= '</div>';
     echo $out;
 } );
 add_action( 'girl_header', function() {
@@ -44,7 +47,8 @@ add_action( 'girl_header', function() {
         'echo' => false,
         'menu' => 'Header Menu',
         'theme_location' => 'primary',
-        'container' => 'nav'
+        'container' => 'nav',
+        'container_class' => 'bg-menu bg-header',
     ) );
     echo $out;
 } );

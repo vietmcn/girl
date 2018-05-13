@@ -9,5 +9,7 @@ if( !defined('ABSPATH') ) {
  */
 //Header
 import_template( 'header' );
+//Page Content
+import_template( 'content' );
 //Footer
 import_template( 'footer' );
