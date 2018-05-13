@@ -48,7 +48,14 @@ add_action( 'after_setup_theme', function() {
 	add_theme_support( 'html5', array(
 		'search-form', 'comment-form', 'comment-list', 'gallery', 'caption'
 	) );
-
+	
+	/**
+	 * Reg Menu Wordpress
+	 * see https://codex.wordpress.org/Function_Reference/register_nav_menu
+	 */
+	register_nav_menu( array(
+		'main_menu' => __( 'Menu Main',      'girl' ),
+	) );
 	/*
 	 * Enable support for Post Formats.
 	 *
@@ -69,9 +76,7 @@ add_action( 'after_setup_theme', function() {
 add_filter('show_admin_bar', '__return_false');
 
 /**
- * 
  * import
  * @since 1.0
- * 
  */
 require_once 'help-functions/req.php';
