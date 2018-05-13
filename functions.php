@@ -41,7 +41,7 @@ if ( ! defined( 'N_EXTEND_FOLDER' ) ) {
 if ( ! function_exists( 'import_template' ) ) {
 	function import_template( $name = NULL ) {
 		$inc = 'includes';
-		$template = 'help-function/template';
+		$template = 'help-functions/template';
 		require_once ( N_EXTEND_FOLDER .'/'.$inc.'/'.$template.'/'.$name.'.php' );
 	}
 }

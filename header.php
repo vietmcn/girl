@@ -22,5 +22,6 @@
 	<?php wp_head();?>
 </head>
 <body <?php body_class(); ?>>
+<div class="container">
 <header id="girl-header"><?php do_action('girl_header');?></header>
 <main id="girl-main" class="main-set">

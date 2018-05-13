@@ -14,6 +14,4 @@
  * @since Girl 1.0
  */?>
 <?php do_action('girl_footer');?>
-</main>
-<?php wp_footer();?>
-</body></html>
+</main></div><?php wp_footer();?></body></html>

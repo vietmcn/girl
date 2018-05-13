@@ -2,6 +2,7 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
+
 /**
  * 
  * Config Template 
@@ -53,9 +54,10 @@ add_action( 'after_setup_theme', function() {
 	 * Reg Menu Wordpress
 	 * see https://codex.wordpress.org/Function_Reference/register_nav_menu
 	 */
-	register_nav_menu( array(
-		'main_menu' => __( 'Menu Main',      'girl' ),
+	register_nav_menus( array(
+		'primary' => __( 'Primary Menu',      'girl' ),
 	) );
+
 	/*
 	 * Enable support for Post Formats.
 	 *
@@ -67,13 +69,25 @@ add_action( 'after_setup_theme', function() {
 
 	// Indicate widget sidebars can use selective refresh in the Customizer.
 	add_theme_support( 'customize-selective-refresh-widgets' );
+	
 } );
-
 /**
  * Remove Bar Admin
  * @since 1.0
  */
 add_filter('show_admin_bar', '__return_false');
+
+add_action( 'wp_enqueue_scripts', function() {
+	/**
+	 * Config Style Template
+	 * @link {https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts}
+	 * @since 1.0
+	 * @author Trangfox
+	 */
+	global $ver;
+	wp_enqueue_style( 'girl', get_template_directory_uri().'/style.css', $ver, 'all' );
+	wp_enqueue_style( 'screen', get_template_directory_uri().'/assets/css/screen.min.css', $ver, 'all' );
+} );
 
 /**
  * import
