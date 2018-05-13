@@ -2,6 +2,18 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
+/**
+ * Import Class
+ * @since 1.0
+ * @author Trangfox
+ */
+require_once 'class/admin/_config.php';
+
+/**
+ * import
+ * @since 1.0
+ */
+require_once 'help-functions/req.php';
 
 /**
  * 
@@ -93,16 +105,3 @@ add_action( 'wp_enqueue_scripts', function() {
 	 */
 	wp_enqueue_style( 'font', '//fonts.googleapis.com/css?family=Quicksand:400,500,700', $ver, 'all' );
 } );
-
-/**
- * Import Class
- * @since 1.0
- * @author Trangfox
- */
-require_once 'class/admin/create-post.php';
-
-/**
- * import
- * @since 1.0
- */
-require_once 'help-functions/req.php';

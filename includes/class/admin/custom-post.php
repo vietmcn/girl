@@ -1,4 +1,10 @@
 <?php 
+/**
+ * Custom Post Type 
+ * @link {https://codex.wordpress.org/Post_Types}
+ * @since 1.0
+ * @author Trangfox
+ */
 if ( !defined('ABSPATH') ) {
     exit;
 }
@@ -62,7 +68,6 @@ if ( !class_exists('Content_thumbnail') ) {
                 'capability_type'       => 'post',
             );
             register_post_type( 'photo', $args );
-        
         }
     }
 }

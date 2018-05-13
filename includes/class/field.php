@@ -11,21 +11,25 @@ if ( !class_exists('Set_Field') ) {
     class Set_Field
     {
         protected $att = array();
-        private function textbox( $att )
-        {
 
-        }
         public function field( $att )
         {
+            $atts = $att['value'];
+
             switch ( $att['type'] ) {
                 case 'textbox':
-                    # code...
+                    $this->textbox( $atts );
                     break;
                 
                 default:
                     # code...
                     break;
             }
+        }
+        private function textbox( $att )
+        {
+            $out  = '<lable class="">'.$att['title'].'</label>';
+            $out .= '<input id="" value="'.$att['value']['val'].'" class=""/>';
         }
     }
     
