@@ -13,7 +13,16 @@ if ( !class_exists('Content_metabox') ) {
     {
         public function __construct()
         {
+            add_action( 'add_meta_boxes',        array( $this, 'metabox_add'  ) );
+            add_action( 'save_post',             array( $this, 'metabox_save'  ) );
+        }
+        public function metabox_add()
+        {
 
-        }   
+        }
+        public function metabox_save()
+        {
+            
+        }
     }
 }
