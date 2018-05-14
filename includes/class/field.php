@@ -12,13 +12,12 @@ if ( !class_exists('Set_Field') ) {
     {
         protected $att = array();
 
-        public function field( $att )
+        public function Metabox_field( $type, $att )
         {
-            $atts = $att['value'];
-
-            switch ( $att['type'] ) {
+            
+            switch ( $type ) {
                 case 'textbox':
-                    $this->textbox( $atts );
+                    $this->textbox( $att );
                     break;
                 
                 default:
@@ -28,8 +27,9 @@ if ( !class_exists('Set_Field') ) {
         }
         private function textbox( $att )
         {
-            $out  = '<lable class="">'.$att['title'].'</label>';
-            $out .= '<input id="" value="'.$att['value']['val'].'" class=""/>';
+            foreach ( $att as  $atts ) {
+                echo $atts[0];
+            }
         }
     }
     

@@ -2,6 +2,9 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
+//import field
+require_once ( N_EXTEND_FOLDER .'/includes/class/field.php' );
+
 /**
  * Custom Meta Box 
  * @link {https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/}
@@ -18,6 +21,32 @@ if ( !class_exists('Content_metabox') ) {
         }
         public function metabox_add()
         {
+            /**
+             * add_meta_boxes
+             * @link {https://developer.wordpress.org/reference/functions/add_meta_box/}
+             * @since 1.0
+             * @author Trangfox
+             */
+            add_meta_box(
+                '_meta_thumbnail',
+                __( 'Thuộc Tính Thumbnail' ),
+                array( $this, 'mb_callback' ),
+                'photo',
+                'normal', 
+                'default'
+            );
+
+        }
+        public function mb_callback()
+        {
+            $field = new Set_Field;
+            $field->Metabox_field( 
+                'textbox',
+                array( 'list' => array(
+                    'meta_thumbnail',
+                    'meta_pic'
+                ) )
+            );
 
         }
         public function metabox_save()
@@ -26,3 +55,4 @@ if ( !class_exists('Content_metabox') ) {
         }
     }
 }
+return new Content_metabox;
