@@ -28,10 +28,9 @@ add_action( 'girl_header', function() {
     } else {
         $container = 'div';
     }
-    $out  = '<div id="header-cover">';
-    $out .= '<figure class="cover-logo"><img src="'.get_template_directory_uri().'/assets/img/cover-avatar.jpg" alt="Sexy Girl Xiuren Photo 18+"/></figure>';
-    $out .= '<'.$container.' class="bg-header bg-logo">';
-    $out .= 'Trangfox.com';
+    $out  = '<div id="header-top">';
+    $out .= '<'.$container.' class="flex logo">';
+    $out .= '<a href="/" title="Home">Trangfox.com</a>';
     $out .= '</'.$container.'>';
     $out .= '</div>';
     echo $out;

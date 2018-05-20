@@ -98,7 +98,9 @@ add_action( 'wp_enqueue_scripts', function() {
 	 */
 	global $ver;
 	wp_enqueue_style( 'girl', get_template_directory_uri().'/style.css', $ver, 'all' );
-	wp_enqueue_style( 'screen', get_template_directory_uri().'/assets/css/screen.min.css', $ver, 'all' );
+	if ( wp_is_mobile() ) {
+		wp_enqueue_style( 'screen-small', get_template_directory_uri().'/assets/css/screensmall.min.css', $ver, 'all' );
+	}
 	/**
 	 * Font Google 
 	 * @since 1.0

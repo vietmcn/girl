@@ -11,5 +11,7 @@ if( !defined('ABSPATH') ) {
 import_template( 'header' );
 //Page Content
 import_template( 'content' );
+//single
+import_template( 'content-single' );
 //Footer
 import_template( 'footer' );

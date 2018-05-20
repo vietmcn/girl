@@ -64,7 +64,7 @@ if ( !class_exists('Content_thumbnail') ) {
                 'has_archive'           => true,
                 'exclude_from_search'   => false,
                 'publicly_queryable'    => true,
-                'rewrite'               => false,
+                'rewrite'               => true,
                 'capability_type'       => 'post',
             );
             register_post_type( 'photo', $args );

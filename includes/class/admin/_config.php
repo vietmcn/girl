@@ -9,3 +9,4 @@ if ( !defined('ABSPATH') ) {
 }
 require_once get_template_directory().'/includes/class/admin/custom-post.php';
 require_once get_template_directory().'/includes/class/admin/custom-metabox.php';
+require_once get_template_directory().'/includes/class/admin/custom-shortcode.php';
