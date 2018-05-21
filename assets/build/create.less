@@ -3,6 +3,7 @@ body {
     font-family: 'Quicksand', sans-serif;
     font-size: 14px;
     line-height: 20px;
+    background: #F9F9F9;
     .container {
         max-width: 725px;
         width: 100%;
@@ -93,6 +94,58 @@ body {
                     span.count {
                         text-align: left;
                     }
+                }
+            }
+        }
+        //Content-single
+        section#picbox {
+            padding: 0 10px;
+            figure {
+                margin: 0;
+                img {
+                    width: 100%;
+                    min-height: 250px;
+                }
+            }
+            h1 {
+                font-size: 0.88rem;
+                font-style: normal;
+                padding: 13px 0 0px 0;
+                margin: 0px;
+                font-weight: normal;
+            }
+            .pic-info {
+                font-size: 0.7rem;
+                color: #999;
+                padding-bottom: 5px;
+            }
+            .control-nextpic {
+                justify-content: center;
+                font-size: 0.8rem;
+                background-color: #FDFDFD;
+                margin: 13px 10px;
+                border: 1px solid #ECECEC;
+                border-radius: 3px;
+                span {
+                    color: #333;
+                    text-align: center;
+                    border-right: 1px solid #ECECEC;
+                    border-left: 1px solid #ECECEC;
+                    i {
+                        font-style: normal;
+                    }
+                }
+                span,button {
+                    cursor: pointer;
+                    align-items: center;
+                    height: 33px;
+                    width: 100/3%;
+                    justify-content: center;
+                }
+                button {
+                    border: 0px;
+                    text-transform: uppercase;
+                    background: transparent;
                 }
             }
         }
