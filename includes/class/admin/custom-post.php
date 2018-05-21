@@ -64,7 +64,10 @@ if ( !class_exists('Content_thumbnail') ) {
                 'has_archive'           => true,
                 'exclude_from_search'   => false,
                 'publicly_queryable'    => true,
-                'rewrite'               => true,
+                'rewrite'               => array(
+                                                'slug'       => 'pic', // if you need slug
+                                                'with_front' => true,
+                                            ),
                 'capability_type'       => 'post',
             );
             register_post_type( 'photo', $args );

@@ -2,6 +2,7 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
+
 add_action( 'girl_page', function() {
     /**
      * Before Container Content Template
@@ -17,11 +18,17 @@ add_action( 'girl_front', function() {
      * @since 1.0
      * @author Trangfox
      */
-    global $post;
+    global $post, $pageds;
+
+    
+    $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+
     $Query = new WP_Query( array(
         'post_type' => 'photo',
-        'posts_per_page' => '10',
+        'posts_per_page' => '2',
         'orderby' => 'date',
+        'paged' => $paged,
+        'post_status' => 'publish',
     ) );
 
     $out  = '<ul id="list-thumbnail">';
@@ -42,11 +49,11 @@ add_action( 'girl_front', function() {
             $out .= '<span>'.get_the_date().'</span>';
             $out .= '</div>';
             $out .= '</li>';
-
+            
         endwhile;
 
         wp_reset_postdata();
-
+            
     } else {
 
         echo 'No Thumbnail';

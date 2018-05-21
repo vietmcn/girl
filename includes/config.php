@@ -8,7 +8,8 @@ if ( !defined('ABSPATH') ) {
  * @author Trangfox
  */
 require_once 'class/admin/_config.php';
-
+//paged
+require_once 'class/paged.php';
 /**
  * import
  * @since 1.0
@@ -106,4 +107,6 @@ add_action( 'wp_enqueue_scripts', function() {
 	 * @since 1.0
 	 */
 	wp_enqueue_style( 'font', '//fonts.googleapis.com/css?family=Quicksand:400,500,700', $ver, 'all' );
+	//icon
+	wp_enqueue_script( 'icon', '//unpkg.com/ionicons@4.1.1/dist/ionicons.js', array('jquery'), true );
 } );

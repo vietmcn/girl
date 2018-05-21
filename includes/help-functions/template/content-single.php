@@ -10,7 +10,7 @@ add_action( 'wp_enqueue_scripts', function() {
      */
     global $ver;
     if ( is_single() ) {
-       wp_enqueue_script( 'app', get_template_directory_uri().'/assets/js/app.js', array('jquery'), true, $ver );
+       wp_enqueue_script( 'app', get_template_directory_uri().'/assets/js/app.min.js', array('jquery'), true, $ver );
     }
 } );
 add_action( 'girl_single', function() {

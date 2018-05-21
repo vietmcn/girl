@@ -28,10 +28,12 @@ add_action( 'girl_header', function() {
     } else {
         $container = 'div';
     }
-    $out  = '<div id="header-top">';
+    $out  = '<div id="header-top" class="flex">';
+    $out .= '<span class="account flex"><ion-icon name="contact"></ion-icon></span>';
     $out .= '<'.$container.' class="flex logo">';
     $out .= '<a href="/" title="Home">Trangfox.com</a>';
     $out .= '</'.$container.'>';
+    $out .= '<span class="search flex"><ion-icon name="search"></ion-icon></span>';
     $out .= '</div>';
     echo $out;
 } );
