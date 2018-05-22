@@ -85,24 +85,26 @@ if ( ! class_exists( 'App_paged' ) ) :
             $fox_pageOut  = "<nav class='custom-pagination flex'>";
 
             if ( wp_is_mobile() ) {
-
-                if ( get_previous_posts_link( 'Previous', $numpages ) ) {
-
-                    $prev = get_previous_posts_link( 'Previous', $numpages );
-
-                    $next = '<span class="Next disable">Next</span>';
-
-                } elseif ( get_next_posts_link( 'Next', $numpages ) ) {
-                    
-                    $prev = '<span class="Prev disable">Prev</span>';
-
-                    $next = get_next_posts_link( 'Next', $numpages );
-
+                
+                if ( $paginate_links ) {
+                    if ( get_previous_posts_link( 'Previous', $numpages ) ) {
+    
+                        $prev = get_previous_posts_link( 'Previous', $numpages );
+    
+                        $next = '<span class="Next disable">Next</span>';
+    
+                    } elseif ( get_next_posts_link( 'Next', $numpages ) ) {
+                        
+                        $prev = '<span class="Prev disable">Prev</span>';
+    
+                        $next = get_next_posts_link( 'Next', $numpages );
+    
+                    }
+    
+                    $fox_pageOut .= $prev;
+                    $fox_pageOut .= '<span class="count-paged">(Page '.$paged.'/'.$numpages.')</span>';
+                    $fox_pageOut .= $next;
                 }
-
-                $fox_pageOut .= $prev;
-                $fox_pageOut .= '<span class="count-paged">(Page '.$paged.'/'.$numpages.')</span>';
-                $fox_pageOut .= $next;
 
             } else {
 

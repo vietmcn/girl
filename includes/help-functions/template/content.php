@@ -28,7 +28,7 @@ add_action( 'girl_front', function() {
 
     $Query = new WP_Query( array(
         'post_type' => 'photo',
-        'posts_per_page' => '2',
+        'posts_per_page' => 2,
         'orderby' => 'date',
         'paged' => $paged,
         'post_status' => 'publish',

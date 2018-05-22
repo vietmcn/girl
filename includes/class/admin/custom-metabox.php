@@ -49,6 +49,9 @@ if ( !class_exists('Content_metabox') ) {
                 'content' => array(
                     'id_1' => 'meta_thumbnail',
                     'id_2' => 'meta_count',
+                    'id_3' => array( 
+                        'id_1' => 'meta_nz'
+                    ),
                 ),
             ) );
         }

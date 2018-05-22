@@ -68,6 +68,13 @@ body {
                             justify-content: center;
                             color: #222;
                         }
+                        
+                    }
+                    li.current-menu-item {
+                        a {
+                            color: #386DCD;
+                            border-bottom: 1px solid #386DCD;
+                        }
                     }
                 }
             }
@@ -79,17 +86,18 @@ body {
             li {
                 list-style: none;
                 border-bottom: 1px solid #ECECEC;
+                padding: 0 10px;
                 h2 {
-                    font-size: 13px;
+                    font-size: 14px;
                     font-weight: normal;
-                    margin: 13px 10px;
+                    margin: 13px 0px;
                     a {
                         color: #333;
                         text-decoration: none;
                     }
                 }
                 figure {
-                    margin: 5px;
+                    margin: 0px;
                     img {
                         width: 100%;
                     }
@@ -116,7 +124,7 @@ body {
             background-color: #ECECEC;
             border-radius: 3px;
             width: 90%;
-            margin: 10px auto;
+            margin: 20px auto;
             span, a {
                 width: 100/3%;
                 height: 30px;
@@ -133,7 +141,6 @@ body {
         }
         //Content-single
         section#picbox {
-            padding: 0 10px;
             figure {
                 margin: 0;
                 img {
@@ -145,8 +152,11 @@ body {
                 font-size: 0.88rem;
                 font-style: normal;
                 padding: 13px 0 0px 0;
-                margin: 0px;
+                margin: 10px 0 0;
                 font-weight: normal;
+            }
+            h1, figure#photo,.pic-info {
+                padding: 0 10px;
             }
             .pic-info {
                 font-size: 0.7rem;
@@ -183,7 +193,17 @@ body {
                 }
             }
         }
-        
+        //related
+        .related {
+            .title {
+                font-size: 0.8rem;
+                color: #999;
+                display: inline-block;
+                margin-top: 13px;
+                padding-left: 7px;
+                border-left: 3px solid #4480EB;
+            }
+        }
     }
     //footer
     footer {
