@@ -73,30 +73,54 @@ if ( ! class_exists( 'App_paged' ) ) :
                 'end_size'        => 1,
                 'mid_size'        => $pagerange,
                 'prev_next'       => true,
-                'prev_text'       => __('Xem Thêm'),
-                'next_text'       => __('Xem Thêm'),
+                'prev_text'       => __('Prev'),
+                'next_text'       => __('Next'),
                 'type'            => 'plain',
                 'add_args'        => false,
                 'add_fragment'    => ''
               );
         
               $paginate_links = paginate_links( $pagination_args );
-        
-            if ( $paginate_links ) {
 
-                $fox_pageOut  = "<nav class='custom-pagination'>";
+            $fox_pageOut  = "<nav class='custom-pagination flex'>";
 
-                $fox_pageOut .= "<span class='page-numbers page-num'>Page " . $paged . " of " . $numpages . "</span> ";
-                
-                $fox_pageOut .= $paginate_links;
+            if ( wp_is_mobile() ) {
 
-                $fox_pageOut .= "</nav>";
+                if ( get_previous_posts_link( 'Previous', $numpages ) ) {
 
-                return $fox_pageOut;
+                    $prev = get_previous_posts_link( 'Previous', $numpages );
 
+                    $next = '<span class="Next disable">Next</span>';
+
+                } elseif ( get_next_posts_link( 'Next', $numpages ) ) {
+                    
+                    $prev = '<span class="Prev disable">Prev</span>';
+
+                    $next = get_next_posts_link( 'Next', $numpages );
+
+                }
+
+                $fox_pageOut .= $prev;
+                $fox_pageOut .= '<span class="count-paged">(Page '.$paged.'/'.$numpages.')</span>';
+                $fox_pageOut .= $next;
+
+            } else {
+
+                if ( $paginate_links ) {
+    
+    
+                    $fox_pageOut .= "<span class='page-numbers page-num'>Page " . $paged . " of " . $numpages . "</span> ";
+                    
+                    $fox_pageOut .= $paginate_links;
+    
+                    
+                }
             }
+            $fox_pageOut .= "</nav>";
+
+            return $fox_pageOut;
         }
     }
     
 endif;
-return $pageds = new App_paged();
+$pageds = new App_paged();

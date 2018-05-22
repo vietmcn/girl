@@ -20,8 +20,11 @@ add_action( 'girl_front', function() {
      */
     global $post, $pageds;
 
-    
-    $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+    if ( is_front_page() || is_home() ) {
+        $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+    } else {
+        $paged = 1;
+    }
 
     $Query = new WP_Query( array(
         'post_type' => 'photo',
@@ -31,6 +34,7 @@ add_action( 'girl_front', function() {
         'post_status' => 'publish',
     ) );
 
+    ob_start();
     $out  = '<ul id="list-thumbnail">';
 
     if ( $Query->have_posts() ) {
@@ -52,15 +56,21 @@ add_action( 'girl_front', function() {
             
         endwhile;
 
+        //Rest Query 
         wp_reset_postdata();
-            
+        wp_reset_query();
+        
+        //Paged
+        $out .= $pageds->page( $Query->max_num_pages, '', $paged );
+
     } else {
 
         echo 'No Thumbnail';
 
     }
     $out .= '</ul>';
-
+    //Cache
+    $out .= ob_get_clean();
     echo $out;
 
 } );

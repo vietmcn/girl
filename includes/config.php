@@ -7,9 +7,8 @@ if ( !defined('ABSPATH') ) {
  * @since 1.0
  * @author Trangfox
  */
-require_once 'class/admin/_config.php';
-//paged
-require_once 'class/paged.php';
+require_once 'class/admin/_config.php'; //config admin
+require_once 'class/paged.php'; //paged
 /**
  * import
  * @since 1.0
