@@ -20,7 +20,7 @@ add_action( 'girl_single', function() {
 
     $out  = '<h1 id="pic-title">'.get_the_title().'</h1>';
     $out .= '<div class="pic-info">';
-    $out .= '<time class="pic-date" datetime="">'.get_the_date().'</time>';
+    $out .= '<time class="pic-date" datetime="'.get_the_date('m/d/Y').'">'.get_the_date().'</time>';
     $out .= '</div>';
     echo $out;
 
@@ -31,6 +31,15 @@ add_action( 'girl_single', function() {
     $out = $out_post->post_content;
     $out = apply_filters( 'the_content', $out );
     $out = str_replace( ']]>', ']]&gt;', $out );
+    echo $out;
+} );
+add_action ( 'girl_single', function() {
+    global $post;
+    $meta = get_post_meta( $post->ID, '_meta_thumbnail', true );
+    $out  = '<div class="downloadfile">';
+    $out .= '<p class="file-size">'.$meta['meta_count'].'</p>';
+    $out .= '<p>We use shorte link shortening service</p>';
+    $out .= '</div>';
     echo $out;
 } );
 add_action( 'girl_single', function() {

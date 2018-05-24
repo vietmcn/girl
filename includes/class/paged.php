@@ -84,7 +84,7 @@ if ( ! class_exists( 'App_paged' ) ) :
 
             $fox_pageOut  = "<nav class='custom-pagination flex'>";
 
-            if ( wp_is_mobile() ) {
+            #if ( wp_is_mobile() ) {
                 
                 if ( $paginate_links ) {
                     if ( get_previous_posts_link( 'Previous', $numpages ) ) {
@@ -106,18 +106,18 @@ if ( ! class_exists( 'App_paged' ) ) :
                     $fox_pageOut .= $next;
                 }
 
-            } else {
+           # } else {
 
-                if ( $paginate_links ) {
+               # if ( $paginate_links ) {
     
     
-                    $fox_pageOut .= "<span class='page-numbers page-num'>Page " . $paged . " of " . $numpages . "</span> ";
+                #    $fox_pageOut .= "<span class='page-numbers page-num'>Page " . $paged . " of " . $numpages . "</span> ";
                     
-                    $fox_pageOut .= $paginate_links;
+                #    $fox_pageOut .= $paginate_links;
     
                     
-                }
-            }
+                #}
+            #}
             $fox_pageOut .= "</nav>";
 
             return $fox_pageOut;

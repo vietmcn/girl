@@ -2,9 +2,6 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
-//import field
-require_once ( N_EXTEND_FOLDER .'/includes/class/field.php' );
-
 /**
  * Custom Meta Box 
  * @link {https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/}
@@ -18,6 +15,7 @@ if ( !class_exists('Content_metabox') ) {
         {
             add_action( 'add_meta_boxes',        array( $this, 'metabox_add'  ) );
             add_action( 'save_post',             array( $this, 'metabox_save'  ) );
+            add_action( 'admin_footer',          array( $this, 'print_script' ) );
         }
         public function metabox_add()
         {
@@ -38,6 +36,9 @@ if ( !class_exists('Content_metabox') ) {
         }
         public function mb_callback( $post )
         {
+            //import field
+            require_once ( N_EXTEND_FOLDER .'/includes/class/admin/custom-field.php' );
+
             wp_nonce_field( 'car_nonce_action', 'car_nonce' );
 
             $field = new Set_Field;
@@ -49,9 +50,8 @@ if ( !class_exists('Content_metabox') ) {
                 'content' => array(
                     'id_1' => 'meta_thumbnail',
                     'id_2' => 'meta_count',
-                    'id_3' => array( 
-                        'id_1' => 'meta_nz'
-                    ),
+                    'id_3' => 'meta_filesize',
+                    'id_4' => 'meta_download',
                 ),
             ) );
         }
@@ -101,6 +101,56 @@ if ( !class_exists('Content_metabox') ) {
                     delete_post_meta( $post_id, '_meta_thumbnail' );
 
                 }
+        }
+        public function print_script()
+        {
+            $screen = get_current_screen(); // This is how we will check what page we are on
+            #if ( in_array( $screen->id, array( 'post', 'page' ) ) ) {
+                ?>
+                    <style>
+                        .button_plus {
+                            background: #e02222;
+                            padding: 0px 5px 3px;
+                            color: #fff;
+                            border-radius: 5px;
+                            font-size: 15px;
+                            display: inline-flex;
+                            font-weight: 700;
+                            cursor: pointer;
+                            margin-left: 5px;
+                            vertical-align: -3px;
+                            line-height: 15px;
+                        }
+                        .address input {
+                            width: 90%;
+                            margin-bottom: 5px;
+                        }
+                    </style>
+                    <script> 
+                        jQuery(document).ready(function ($) {
+                            $(document).ready(function(){
+                                $("#add-address").click(function(e){
+                                    e.preventDefault();
+                                    var numberOfAddresses = $(".postbox").find("input[name^='_meta_thumbnail[meta_download]']").length;
+                                    var input = '<input type="text" name="_meta_thumbnail[meta_download][' + numberOfAddresses + ']" />';
+                                    var removeButton = '<span class="remove-address button_plus">-</span>';
+                                    var html = "<div class='address'>" + input + removeButton + "</div>";
+                                    $(".postbox").find(".meta_label").after(html);
+                                });
+                            });
+
+                            $(document).on("click", ".remove-address",function(e){
+                                e.preventDefault();
+                                $(this).parents(".address").remove();
+                                //update labels
+                                $(".postbox").find("label[for^='_meta_thumbnail']").each(function(){
+                                    //$(this).html("Ảnh Đại Diện " + ($(this).parents('.address').index() + 1));
+                                });
+                            });
+                        });
+                    </script>
+                <?php 
+            #}
         }
     }
 }
