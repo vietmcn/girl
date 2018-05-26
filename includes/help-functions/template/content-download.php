@@ -2,15 +2,17 @@
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
-add_action( 'template_redirect', 'my_callback' );
-function my_callback() {
-  if ( is_page( 'dw' ) ) {
-      if ( ! isset( $_GET['id'] ) ) {
-          wp_redirect( "/", 301 );
-          exit();
+add_action( 'template_redirect', function() {
+    /**
+     * Create Redirect Page Download
+     */
+    if ( is_page( 'dw' ) ) {
+        if ( empty( $_GET['id'] ) ) {
+            wp_safe_redirect( home_url(), 301 );
+            exit();
         }
     }
-}
+} );
 add_action( 'girl_page', function() {
 
     if ( is_page( 'dw' ) ) {

@@ -32,7 +32,7 @@ body {
                         text-decoration: none;
                     }           
                 }
-                span {
+                span, .logo {
                     width: 100/3%;
                 }
                 span.search,.account {
@@ -51,12 +51,15 @@ body {
                 ul {
                     padding: 0px;
                     margin: 0px;
+                    display: flex;
+                    display: -webkit-flex;
                     li {
                         list-style: none;
                         font-size: 0.8rem;
                         height: 2rem;
                         background: #EEE url(http://m.99mm.me/images/line.gif) repeat-x left bottom;
                         padding-bottom: 1px;
+                        width: 100/4%;
                         a {
                             text-decoration: none;
                             font-size: 14px;
@@ -64,9 +67,10 @@ body {
                             display: inline-flex;
                             display: -webkit-inline-flex;
                             align-items: center;
-                            width: 25%;
+                            width: 100%;
                             justify-content: center;
                             color: #222;
+                            text-transform: uppercase;
                         }
                         
                     }
@@ -190,6 +194,26 @@ body {
                     border: 0px;
                     text-transform: uppercase;
                     background: transparent;
+                }
+            }
+            .downloadfile {
+                background: rgb(61, 113, 210);
+                padding: 10px;
+                h3 {
+                    margin: 0px;
+                    font-size: 16px;
+                    color: #fff;
+                    font-weight: normal;
+                    text-transform: uppercase;
+                }
+                p {
+                    margin: 10px 0px;
+                    color: #fff;
+                    a {
+                        color: #fff;
+                        text-decoration: none;
+                        font-weight: 500;
+                    }
                 }
             }
         }
