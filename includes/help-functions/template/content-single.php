@@ -35,10 +35,12 @@ add_action( 'girl_single', function() {
 } );
 add_action ( 'girl_single', function() {
     global $post;
+    
     $meta = get_post_meta( $post->ID, '_meta_thumbnail', true );
     $out  = '<div class="downloadfile">';
     $out .= '<p class="file-size">'.$meta['meta_count'].'</p>';
     $out .= '<p>We use shorte link shortening service</p>';
+    $out .= '<p><a tilte="'.get_the_title().'" target="_blank" href="/dw/?id='.$post->ID.'">Download'.get_the_title().'</a></p>';
     $out .= '</div>';
     echo $out;
 } );
