@@ -48,6 +48,7 @@ body {
             }
             //Nav
             nav.bg-menu {
+                background: #EEE;
                 ul {
                     padding: 0px;
                     margin: 0px;
@@ -57,7 +58,7 @@ body {
                         list-style: none;
                         font-size: 0.8rem;
                         height: 2rem;
-                        background: #EEE url(http://m.99mm.me/images/line.gif) repeat-x left bottom;
+                        background: url('../img/line.gif') repeat-x left bottom;
                         padding-bottom: 1px;
                         width: 100/4%;
                         a {
@@ -136,11 +137,15 @@ body {
                 display: -webkit-flex;
                 align-items: center;
                 justify-content: center;
-                background: url(http://m.99mm.me/css/page.gif) repeat-y right top;
-                width: 34%;
+                background: url('../img/page.gif') repeat-y right top;
+                text-transform: uppercase;
+                font-size: 95%;
             }
             a {
                 text-decoration: none;
+            }
+            a.next {
+                background-position: 220px;
             }
         }
         //Content-single
@@ -236,9 +241,9 @@ body {
     }
     //page download 
     .download-page {
-        margin: 25px 10px;
+        //margin: 25px 10px;
         padding: 10px;
-        background: rgb(224, 224, 224);
+        background: #fbfbfb;
         h2 {
             margin: 0px;
             font-weight: 500;
@@ -249,7 +254,11 @@ body {
             margin: 0px;
             li {
                 list-style: none;
+                margin: 5px 0px;
             }
+        }
+        img {
+            width: 100%;
         }
     }
     //footer

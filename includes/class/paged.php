@@ -3,121 +3,145 @@ if ( ! defined( 'ABSPATH' ) ) :
     exit;
 endif;
 
+add_action( 'pre_get_posts', function( $query ) {
+    /**
+    * Set Pre Post
+    * @link {}
+    * @since 1.0
+    * @author Girl 
+    */
+    if ( $query->is_main_query() && !$query->is_feed() && !is_admin() && is_category() ) {
+
+        $query->set('page_cat', get_query_var('paged'));
+
+        $query->set( 'paged', 0 );
+
+    } elseif ( $query->is_main_query() && !$query->is_feed() && !is_admin() && is_tag() ) {
+
+        $query->set( 'page_tag', get_query_var('paged') );
+
+        $query->set( 'paged', 0 );
+
+    }
+} );
+
 if ( ! class_exists( 'App_paged' ) ) :
 
     class App_paged
     {
-        public function __construct()
+        public static function custom_paged( $numpages = '', $paged = '' )
         {
-            add_action( 'pre_get_posts', array( $this,  'App_custom_pre_get_posts' ) );            
-        }
-        public function App_custom_pre_get_posts( $query )
-        {
-            if ( $query->is_main_query() && !$query->is_feed() && !is_admin() && is_category() ) {
+            
+            global $wp_rewrite;
+            
+            // Setting up default values based on the current URL.
+            $pagenum_link = html_entity_decode( get_pagenum_link() );
+            $url_parts    = explode( '?', $pagenum_link );
+        
+            // Get max pages and current page out of the current query, if available.
+            $total   = $numpages;
+            $current = $paged;
+        
+            // Append the format placeholder to the base URL.
+            $pagenum_link = trailingslashit( $url_parts[0] ) . '%_%';
+        
+            // URL base depends on permalink settings.
+            $format  = $wp_rewrite->using_index_permalinks() && ! strpos( $pagenum_link, 'index.php' ) ? 'index.php/' : '';
+            $format .= $wp_rewrite->using_permalinks() ? user_trailingslashit( $wp_rewrite->pagination_base . '/%#%', 'paged' ) : '?paged=%#%';
+            $defaults = array(
+                'base'               => $pagenum_link, // http://example.com/all_posts.php%_% : %_% is replaced by format (below)
+                'format'             => $format, // ?page=%#% : %#% is replaced by the page number
+                'total'              => $total,
+                'current'            => $current,
+                'aria_current'       => 'page',
+                'show_all'           => false,
+                'prev_next'          => true,
+                'prev_text'          => __( 'Previous' ),
+                'next_text'          => __( 'Next' ),
+                'end_size'           => 1,
+                'mid_size'           => 2,
+                'type'               => 'plain',
+                'add_args'           => array(), // array of query args to add
+                'add_fragment'       => '',
+                'before_page_number' => '',
+                'after_page_number'  => '',
+            );
+         
+            $args = wp_parse_args( $defaults );
 
-                $query->set('page_cat', get_query_var('paged'));
-
-                $query->set('paged', 0);
-
-            } elseif ( $query->is_main_query() && !$query->is_feed() && !is_admin() && is_tag() ) {
-
-                $query->set( 'page_tag', get_query_var('paged') );
-
-                $query->set('paged', 0);
-
+            if ( ! is_array( $args['add_args'] ) ) {
+                $args['add_args'] = array();
             }
-        }
-        public function page( $numpages = '', $pagerange = '', $paged = '' )
-        {
-            if ( empty( $pagerange ) ) {
-
-                $pagerange = 2;
-
-              }
-              /**
-               * This first part of our function is a fallback
-               * for custom pagination inside a regular loop that
-               * uses the global $paged and global $wp_query variables.
-               *
-               * It's good because we can now override default pagination
-               * in our theme, and use this function in default quries
-               * and custom queries.
-               */
-              #global $paged;
-              #if ( empty($paged) ) {
-              #  $paged = 1;
-              #}
-              if ( $numpages == '' ) {
-
-                global $wp_query;
-
-                $numpages = $wp_query->max_num_pages;
-
-                if(!$numpages) {
-
-                    $numpages = 1;
-
+            // Merge additional query vars found in the original URL into 'add_args' array.
+            if ( isset( $url_parts[1] ) ) {
+                // Find the format argument.
+                $format = explode( '?', str_replace( '%_%', $args['format'], $args['base'] ) );
+                $format_query = isset( $format[1] ) ? $format[1] : '';
+                wp_parse_str( $format_query, $format_args );
+        
+                // Find the query args of the requested URL.
+                wp_parse_str( $url_parts[1], $url_query_args );
+        
+                // Remove the format argument from the array of query arguments, to avoid overwriting custom format.
+                foreach ( $format_args as $format_arg => $format_arg_value ) {
+                    unset( $url_query_args[ $format_arg ] );
                 }
-              }
-        
-              /**
-               * We construct the pagination arguments to enter into our paginate_links
-               * function.
-               */
-              $pagination_args = array(
-                'base'            => get_pagenum_link(1) . '%_%',
-                'format'          => 'page/%#%',
-                'total'           => $numpages,
-                'current'         => $paged,
-                'show_all'        => false,
-                'end_size'        => 1,
-                'mid_size'        => $pagerange,
-                'prev_next'       => true,
-                'prev_text'       => __('Prev'),
-                'next_text'       => __('Next'),
-                'type'            => 'plain',
-                'add_args'        => false,
-                'add_fragment'    => ''
-              );
-        
-              $paginate_links = paginate_links( $pagination_args );
+                $args['add_args'] = array_merge( $args['add_args'], urlencode_deep( $url_query_args ) );
+            }
 
+            $add_args = $args['add_args'];
+        
             $fox_pageOut  = "<nav class='custom-pagination flex'>";
 
-            #if ( wp_is_mobile() ) {
-                
-                if ( $paginate_links ) {
-                    if ( get_previous_posts_link( 'Previous', $numpages ) ) {
-    
-                        $prev = get_previous_posts_link( 'Previous', $numpages );
-    
-                        $next = '<span class="Next disable">Next</span>';
-    
-                    } elseif ( get_next_posts_link( 'Next', $numpages ) ) {
-                        
-                        $prev = '<span class="Prev disable">Prev</span>';
-    
-                        $next = get_next_posts_link( 'Next', $numpages );
-    
-                    }
-    
-                    $fox_pageOut .= $prev;
-                    $fox_pageOut .= '<span class="count-paged">(Page '.$paged.'/'.$numpages.')</span>';
-                    $fox_pageOut .= $next;
+            if ( $args['current'] == 1 ) {
+
+                $link = str_replace( '%_%', $args['format'], $args['base'] );
+                $link = str_replace( '%#%', $current + 1, $link );
+                if ( $add_args ) {
+                    $link = add_query_arg( $add_args, $link );
                 }
+                $link .= $args['add_fragment'];
 
-           # } else {
+                $prev = '<span class="disable">Prev</span>';
+                $next = '<a href="'.esc_url( $link ).'">'.$args['next_text'].'</a>';
 
-               # if ( $paginate_links ) {
-    
-    
-                #    $fox_pageOut .= "<span class='page-numbers page-num'>Page " . $paged . " of " . $numpages . "</span> ";
-                    
-                #    $fox_pageOut .= $paginate_links;
-    
-                    
-                #}
-            #}
+            } elseif ( $args['current'] == $args['total'] ) {
+
+                $link = str_replace( '%_%', 2 == $current ? '' : $args['format'], $args['base'] );
+                $link = str_replace( '%#%', $current - 1, $link );
+                
+                if ( $add_args ) {
+                    $link = add_query_arg( $add_args, $link );
+                }
+                $link .= $args['add_fragment'];
+
+                $next = '<span class="disable">'.$args['next_text'].'</span>';
+                $prev = '<a href="'.esc_url( $link ).'">'.$args['prev_text'].'</a>';
+
+            } else {
+
+                //Prev Paged
+                $link_prev = str_replace( '%_%', 2 == $current ? '' : $args['format'], $args['base'] );
+                $link_prev = str_replace( '%#%', $current - 1, $link_prev );
+                if ( $add_args ) {
+                    $link_prev = add_query_arg( $add_args, $link_prev );
+                }
+                $link_prev .= $args['add_fragment'];
+                $prev = '<a href="'.esc_url( $link_prev ).'">'.$args['prev_text'].'</a>';
+                //Next Paged
+                $link_next = str_replace( '%_%', $args['format'], $args['base'] );
+                $link_next = str_replace( '%#%', $current + 1, $link_next );
+                if ( $add_args ) {
+                    $link_next = add_query_arg( $add_args, $link_next );
+                }
+                $link_next .= $args['add_fragment'];
+                $next = '<a class="next" href="'.esc_url( $link_next ).'">'.$args['next_text'].'</a>';
+            }
+
+            $fox_pageOut .= $prev;
+            $fox_pageOut .= '<span class="count-paged">(Page '.$paged.'/'.$numpages.')</span>';
+            $fox_pageOut .= $next;
+                
             $fox_pageOut .= "</nav>";
 
             return $fox_pageOut;
@@ -125,4 +149,4 @@ if ( ! class_exists( 'App_paged' ) ) :
     }
     
 endif;
-$pageds = new App_paged();
+$pageds = new App_paged;

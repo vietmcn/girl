@@ -2,7 +2,7 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
-add_action( 'girl_page', function() {
+add_action( 'girl_archive', function() {
     /**
      * Before Container Content Template
      * @since 1.0
@@ -10,29 +10,25 @@ add_action( 'girl_page', function() {
      */
     echo '<div id="content" class="container">';
 } );
-add_action( 'girl_page', function() {
-    /**
-     * Gọi Content Trang chủ
-     * @link {}
-     * @since 1.0
-     * @author Trangfox
-     */
+add_action( 'girl_archive', function(){
+    
     global $pageds;
 
-    if ( is_front_page() || is_home() ) {
-        $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
-    } else {
-        $paged = 1;
+    if ( is_category() ) {
+        $paged = get_query_var( 'page_cat' ) ? get_query_var( 'page_cat' ) : 1;
+    } elseif ( is_tag() ) {
+        $paged = get_query_var( 'page_tag' ) ? get_query_var( 'page_tag' ) : 1;
     }
-
     $Query = new WP_Query( array(
         'post_type' => 'photo',
-        'posts_per_page' => 1,
+        'posts_per_page' => 2,
         'orderby' => 'date',
         'paged' => $paged,
+        'post_status' => 'publish',
+        'cat' => get_query_var( 'cat' ) ? absint( get_query_var( 'cat' ) ) : NULL,
+        'tag_id' => get_query_var( 'tag_id' ) ? absint( get_query_var( 'tag_id' ) ) : NULL,
     ) );
-
-    #ob_start();
+    ob_start();
     $out  = '<ul id="list-thumbnail">';
 
     if ( $Query->have_posts() ) {
@@ -68,12 +64,10 @@ add_action( 'girl_page', function() {
     }
     $out .= '</ul>';
     //Cache
-    #$out .= ob_get_clean();
+    $out .= ob_get_clean();
     echo $out;
-
 } );
-
-add_action( 'girl_page', function() {
+add_action( 'girl_archive', function() {
     /**
      * Before Container Content Template
      * @since 1.0

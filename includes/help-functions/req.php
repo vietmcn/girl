@@ -11,6 +11,8 @@ if( !defined('ABSPATH') ) {
 import_template( 'header' );
 //Page Content
 import_template( 'content' );
+//Page Archive 
+import_template( 'content-archive' );
 //Page Download
 import_template( 'content-download' );
 //single
