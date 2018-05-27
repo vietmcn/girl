@@ -37,32 +37,33 @@ add_action( 'girl_page', function() {
                 if ( !empty( $meta['meta_download'] ) ) {
 
                     foreach ( $meta['meta_download'] as $value ) {
-    
+
+                        $name = explode( ']', $value );
+                            
+                        $sv = explode( '-', $name[0] );
+                            
+                        $link = $name[1];
+
+                        if( $sv[0] == '[mega' ) {
+                            $name = 'Mega.nz';
+                            $part = ' Part'.$sv[1];
+                        } elseif( $sv[0] == '[zippy' ) {
+                            $name = 'ZippyShare';
+                            $part = ' Part'.$sv[1];
+                        } elseif( $sv[0] == '[mf' ) {
+                            $name = 'MediaFire';
+                            $part = ' Part'.$sv[1];
+                        } else {
+                            $name = 'Trangfox';
+                            $part = '';
+                        }
+
                         if ( count( $meta['meta_download'] ) == 1 ) {
-    
-                            $out .= '<li id="download-item"><a target="_blank" rel="nofollow" href="'.esc_url( $value ).'" title="Download photo '.get_the_title( $id ).'">'.get_the_title( $id ).'</a></li>';
+
+                            $out .= '<li id="download-item"><span>'.$name.':</span> <a target="_blank" rel="nofollow" href="'.esc_url( $link ).'" title="Download photo '.get_the_title( $id ).'">'.get_the_title( $id ).'</a></li>';
     
                         } else {
-    
-                            $name = explode( ']', $value );
-                            
-                            $sv = explode( '-', $name[0] );
-                            
-                            $link = $name[1];
-    
-                            if( $sv[0] == '[mega' ) {
-                                $name = 'Mega.nz';
-                                $part = ' Part'.$sv[1];
-                            } elseif( $sv[0] == '[zippy' ) {
-                                $name = 'ZippyShare';
-                                $part = ' Part'.$sv[1];
-                            } elseif( $sv[0] == '[mf' ) {
-                                $name = 'MediaFire';
-                                $part = ' Part'.$sv[1];
-                            } else {
-                                $name = 'Trangfox';
-                                $part = '';
-                            }
+
                             $out .= '<li id="download-item"><span>'.$name.':</span> <a target="_blank" rel="nofollow" href="'.esc_url( $link ).'" title="Download photo '.get_the_title( $id ).'">'.get_the_title( $id ).$part.'</a></li>';
     
                         }

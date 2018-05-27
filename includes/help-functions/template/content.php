@@ -11,66 +11,64 @@ add_action( 'girl_page', function() {
     echo '<div id="content" class="container">';
 } );
 add_action( 'girl_page', function() {
-    /**
-     * Gọi Content Trang chủ
-     * @link {}
-     * @since 1.0
-     * @author Trangfox
-     */
-    global $pageds;
 
     if ( is_front_page() || is_home() ) {
-        $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
-    } else {
-        $paged = 1;
-    }
+        /**
+         * Gọi Content Trang chủ
+         * @link {}
+         * @since 1.0
+         * @author Trangfox
+         */
+        global $pageds;
 
-    $Query = new WP_Query( array(
-        'post_type' => 'photo',
-        'posts_per_page' => 1,
-        'orderby' => 'date',
-        'paged' => $paged,
-    ) );
+            $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
 
-    #ob_start();
-    $out  = '<ul id="list-thumbnail">';
+        $Query = new WP_Query( array(
+            'post_type' => 'photo',
+            'posts_per_page' => 10,
+            'orderby' => 'date',
+            'paged' => $paged,
+        ) );
 
-    if ( $Query->have_posts() ) {
+        ob_start();
+        $out  = '<ul id="list-thumbnail">';
 
-        while ( $Query->have_posts() ) : $Query->the_post();
+        if ( $Query->have_posts() ) {
 
-            $meta = get_post_meta( $Query->post->ID, '_meta_thumbnail', true );
+            while ( $Query->have_posts() ) : $Query->the_post();
+
+                $meta = get_post_meta( $Query->post->ID, '_meta_thumbnail', true );
+                
+                $out .= '<li data-id="'.$Query->post->ID.'" class="thumbnail-class">';
+                $out .= '<h2><a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a></h2>';
+                $out .= '<figure><a href="'.get_permalink().'" title="'.get_the_title().'">';
+                $out .= '<img class="thumbnail-item" src="'.$meta['meta_thumbnail'].'" alt="'.get_the_title().'" />';
+                $out .= '</a></figure>';
+                $out .= '<div class="meta flex">';
+                $out .= '<span class="count">'.$meta['meta_count'].'pic</span>';
+                $out .= '<span>'.get_the_date().'</span>';
+                $out .= '</div>';
+                $out .= '</li>';
+                
+            endwhile;
+
+            //Rest Query 
+            wp_reset_postdata();
+            wp_reset_query();
             
-            $out .= '<li data-id="'.$Query->post->ID.'" class="thumbnail-class">';
-            $out .= '<h2><a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a></h2>';
-            $out .= '<figure><a href="'.get_permalink().'" title="'.get_the_title().'">';
-            $out .= '<img class="thumbnail-item" src="'.$meta['meta_thumbnail'].'" alt="'.get_the_title().'" />';
-            $out .= '</a></figure>';
-            $out .= '<div class="meta flex">';
-            $out .= '<span class="count">'.$meta['meta_count'].'pic</span>';
-            $out .= '<span>'.get_the_date().'</span>';
-            $out .= '</div>';
-            $out .= '</li>';
-            
-        endwhile;
+            //Paged
+            $out .= $pageds::custom_paged( $Query->max_num_pages, $paged );
 
-        //Rest Query 
-        wp_reset_postdata();
-        wp_reset_query();
-        
-        //Paged
-        $out .= $pageds::custom_paged( $Query->max_num_pages, $paged );
+        } else {
 
-    } else {
+            echo '<li>No Content</li>';
 
-        echo '<li>No Content</li>';
-
+        }
+        $out .= '</ul>';
+        //Cache
+        $out .= ob_get_clean();
+        echo $out;
     }
-    $out .= '</ul>';
-    //Cache
-    #$out .= ob_get_clean();
-    echo $out;
-
 } );
 
 add_action( 'girl_page', function() {

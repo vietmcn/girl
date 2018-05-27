@@ -21,7 +21,7 @@ add_action( 'girl_archive', function(){
     }
     $Query = new WP_Query( array(
         'post_type' => 'photo',
-        'posts_per_page' => 2,
+        'posts_per_page' => 10,
         'orderby' => 'date',
         'paged' => $paged,
         'post_status' => 'publish',

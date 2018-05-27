@@ -24,7 +24,7 @@ if ( !class_exists( 'Girl_Shortcode' ) ) {
                 
                 $items .= '{';
                 $items .= '"id":'.$i++.',';
-                $items .= '"photo":"'.$item.'"';
+                $items .= '"photo":"'.esc_attr( $item ).'"';
                 $items .= '},';
             }
             ob_start();

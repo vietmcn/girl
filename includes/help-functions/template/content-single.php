@@ -38,12 +38,15 @@ add_action ( 'girl_single', function() {
     global $post;
     
     $meta = get_post_meta( $post->ID, '_meta_thumbnail', true );
+
     $out  = '<div class="downloadfile">';
     $out .= '<h3><ion-icon name="image"></ion-icon>Download Fill Photo</h3>';
     $out .= '<p><ion-icon name="color-fill"></ion-icon>Thank you for the light and for following our channel. It is inconvenient for us to use the shortening service to maintain the service.</p>';
-    if ( !empty( $meta ) ) {
-        $file = ( !empty( $meta['meta_filesize'] ) ) ? $meta['meta_filesize'] : '';
-        $out .= '<p class="pic-linkdownload"><ion-icon name="cloud-download"></ion-icon> <a tilte="'.get_the_title().'" target="_blank" href="/dw/?id='.$post->ID.'">Download Pic [ '.$file.'mb ]/[ '.$meta['meta_count'].'pic ]</a></p>';
+    if ( ! empty( $meta['meta_download'] ) ) {
+        $file = ( ! empty( $meta['meta_filesize'] ) ) ? $meta['meta_filesize'] : '';
+        $out .= '<p class="pic-linkdownload"><ion-icon name="cloud-download"></ion-icon> <a rel="nofollow" tilte="'.get_the_title().'" target="_blank" href="/dw/?id='.$post->ID.'">Download Pic [ '.$meta['meta_count'].'pic ]/[ '.$file.'mb ]</a></p>';
+    } else {
+        
     }
     $out .= '</div>';
     echo $out;

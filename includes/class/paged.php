@@ -102,22 +102,21 @@ if ( ! class_exists( 'App_paged' ) ) :
                 }
                 $link .= $args['add_fragment'];
 
-                $prev = '<span class="disable">Prev</span>';
+                $prev = '<span class="disable">'.$args['prev_text'].'</span>';
                 $next = '<a href="'.esc_url( $link ).'">'.$args['next_text'].'</a>';
 
             } elseif ( $args['current'] == $args['total'] ) {
 
-                $link = str_replace( '%_%', 2 == $current ? '' : $args['format'], $args['base'] );
+                $link = str_replace( '%_%', $args['format'], $args['base'] );
                 $link = str_replace( '%#%', $current - 1, $link );
-                
                 if ( $add_args ) {
                     $link = add_query_arg( $add_args, $link );
                 }
                 $link .= $args['add_fragment'];
 
-                $next = '<span class="disable">'.$args['next_text'].'</span>';
                 $prev = '<a href="'.esc_url( $link ).'">'.$args['prev_text'].'</a>';
-
+                $next = '<span class="disable">'.$args['next_text'].'</span></a>';
+                
             } else {
 
                 //Prev Paged
@@ -135,7 +134,12 @@ if ( ! class_exists( 'App_paged' ) ) :
                     $link_next = add_query_arg( $add_args, $link_next );
                 }
                 $link_next .= $args['add_fragment'];
-                $next = '<a class="next" href="'.esc_url( $link_next ).'">'.$args['next_text'].'</a>';
+                
+                if ( $args['current'] == $args['total'] ) {
+                    $next = '<span class="disable">'.$args['next_text'].'</span>';
+                } else {
+                    $next = '<a class="next" href="'.esc_url( $link_next ).'">'.$args['next_text'].'</a>';
+                }
             }
 
             $fox_pageOut .= $prev;
