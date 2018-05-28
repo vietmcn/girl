@@ -9,6 +9,8 @@ if( !defined('ABSPATH') ) {
  */
 //Header
 import_template( 'header' );
+//Import SEO
+import_template( 'seo' );
 //Page Content
 import_template( 'content' );
 //Page Archive 

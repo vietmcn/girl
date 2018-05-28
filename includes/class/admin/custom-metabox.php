@@ -9,6 +9,7 @@ if ( !defined('ABSPATH') ) {
  * @author Trangfox
  */
 if ( !class_exists('Content_metabox') ) {
+    
     class Content_metabox
     {
         public function __construct()

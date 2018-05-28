@@ -38,7 +38,7 @@ add_action( 'girl_archive', function(){
             $meta = get_post_meta( $Query->post->ID, '_meta_thumbnail', true );
             
             $out .= '<li data-id="'.$Query->post->ID.'" class="thumbnail-class">';
-            $out .= '<h2><a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a></h2>';
+            $out .= '<h3><a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a></h3>';
             $out .= '<figure><a href="'.get_permalink().'" title="'.get_the_title().'">';
             $out .= '<img class="thumbnail-item" src="'.$meta['meta_thumbnail'].'" alt="'.get_the_title().'" />';
             $out .= '</a></figure>';
