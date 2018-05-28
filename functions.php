@@ -52,7 +52,7 @@ if ( ! function_exists( 'import_template' ) ) {
  * @since 1.0
  */
 $theme       = wp_get_theme( 'girl' );
-$ver   = $theme['Version'];
+$ver         = $theme['Version'];
 
 /**
  * Import includes

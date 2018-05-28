@@ -5,6 +5,7 @@ jQuery(document).ready(function ($) {
     var id = document.getElementById("count");
     var previous = document.getElementById("previous");
     var next = document.getElementById("next");
+    var nextpic = document.getElementById("photo");
     displayItem(item);
     previous.addEventListener("click", function() {
         displayItem(blogs.blogItem[--index]);
@@ -12,10 +13,15 @@ jQuery(document).ready(function ($) {
     next.addEventListener("click", function() {
         displayItem(blogs.blogItem[++index]);
     });
+    nextpic.addEventListener("click", function() {
+        displayItem(blogs.blogItem[++index]);
+    });
     function displayItem(item) {
-        photo.innerHTML = "<img src="+item.photo+" />";
-        id.innerText = item.id;
-        previous.disabled = index <= 0;
-        next.disabled = index >= blogs.blogItem.length -1;
+        if ( item ) {
+            photo.innerHTML = "<img src="+item.photo+" />";
+            id.innerText = item.id;
+            previous.disabled = index <= 0;
+            next.disabled = index >= blogs.blogItem.length -1;
+        }
     }
 });

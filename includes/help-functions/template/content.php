@@ -25,7 +25,7 @@ add_action( 'girl_page', function() {
 
         $Query = new WP_Query( array(
             'post_type' => 'photo',
-            'posts_per_page' => 10,
+            'posts_per_page' => 2,
             'orderby' => 'date',
             'paged' => $paged,
         ) );
@@ -61,7 +61,7 @@ add_action( 'girl_page', function() {
 
         } else {
 
-            echo '<li>No Content</li>';
+            $out .= '<li class="no-content"><img src="'.get_template_directory_uri().'/assets/img/no-content.png"/></li>';
 
         }
         $out .= '</ul>';

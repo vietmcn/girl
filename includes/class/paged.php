@@ -90,56 +90,55 @@ if ( ! class_exists( 'App_paged' ) ) :
             }
 
             $add_args = $args['add_args'];
-        
+            $link_prev = str_replace( '%_%', 2 == $current ? '' : $args['format'], $args['base'] );
+            $link_prev = str_replace( '%#%', $current - 1, $link_prev );
+            $link_next = str_replace( '%_%', $args['format'], $args['base'] );
+            $link_next = str_replace( '%#%', $current + 1, $link_next );
+
+            if ( $add_args ) {
+                $link_prev = add_query_arg( $add_args, $link_prev );
+                $link_next = add_query_arg( $add_args, $link_next );
+            }
+            $link_prev .= $args['add_fragment'];
+            $link_next .= $args['add_fragment'];
+            
             $fox_pageOut  = "<nav class='custom-pagination flex'>";
 
-            if ( $args['current'] == 1 ) {
+            if ( $args['current'] == $args['total'] ) {
 
-                $link = str_replace( '%_%', $args['format'], $args['base'] );
-                $link = str_replace( '%#%', $current + 1, $link );
-                if ( $add_args ) {
-                    $link = add_query_arg( $add_args, $link );
-                }
-                $link .= $args['add_fragment'];
-
-                $prev = '<span class="disable">'.$args['prev_text'].'</span>';
-                $next = '<a href="'.esc_url( $link ).'">'.$args['next_text'].'</a>';
-
-            } elseif ( $args['current'] == $args['total'] ) {
-
-                $link = str_replace( '%_%', $args['format'], $args['base'] );
-                $link = str_replace( '%#%', $current - 1, $link );
-                if ( $add_args ) {
-                    $link = add_query_arg( $add_args, $link );
-                }
-                $link .= $args['add_fragment'];
-
-                $prev = '<a href="'.esc_url( $link ).'">'.$args['prev_text'].'</a>';
-                $next = '<span class="disable">'.$args['next_text'].'</span></a>';
-                
-            } else {
-
-                //Prev Paged
-                $link_prev = str_replace( '%_%', 2 == $current ? '' : $args['format'], $args['base'] );
-                $link_prev = str_replace( '%#%', $current - 1, $link_prev );
-                if ( $add_args ) {
-                    $link_prev = add_query_arg( $add_args, $link_prev );
-                }
-                $link_prev .= $args['add_fragment'];
                 $prev = '<a href="'.esc_url( $link_prev ).'">'.$args['prev_text'].'</a>';
-                //Next Paged
-                $link_next = str_replace( '%_%', $args['format'], $args['base'] );
-                $link_next = str_replace( '%#%', $current + 1, $link_next );
-                if ( $add_args ) {
-                    $link_next = add_query_arg( $add_args, $link_next );
+
+                $next = '<span class="disable">'.$args['next_text'].'</span>';
+                
+            } elseif ( $args['current'] < $args['total'] ) {
+
+                if ( $args['current'] >= 2 && $args['current'] < $args['total'] ) {
+
+                    $prev = '<a href="'.esc_url( $link_prev ).'">'.$args['prev_text'].'</a>';
+
+
+                } elseif ( $args['current'] < $args['total']  ) {
+
+                    $prev = '<span class="disable">'.$args['prev_text'].'</span>';
+
+                } else {
+                    
+                    $prev = '<a href="'.esc_url( $link_prev ).'">'.$args['prev_text'].'</a>';
+
                 }
-                $link_next .= $args['add_fragment'];
+                $next = '<a href="'.esc_url( $link_next ).'">'.$args['next_text'].'</a>';
+
+
+            } else {
                 
                 if ( $args['current'] == $args['total'] ) {
-                    $next = '<span class="disable">'.$args['next_text'].'</span>';
+                    $prev = '<span class="disable">'.$args['prev_text'].'</span>';
+                    $next = '<a href="'.esc_url( $link_next ).'">'.$args['next_text'].'</a>';
                 } else {
-                    $next = '<a class="next" href="'.esc_url( $link_next ).'">'.$args['next_text'].'</a>';
+                    $prev = '<a href="'.esc_url( $link_prev ).'">'.$args['prev_text'].'</a>';
+                    $next = '<a href="'.esc_url( $link_next ).'">'.$args['next_text'].'</a>';
                 }
+                
             }
 
             $fox_pageOut .= $prev;
