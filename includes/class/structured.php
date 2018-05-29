@@ -8,9 +8,15 @@ if (!class_exists( 'Ninja_Structured' ) ) {
         /**
          * Array
          */
-        protected $att = array();
+        protected $atts = array();
+        
+        protected $att = NULL;
 
-        public function meta( $att )
+        public function title( $att ) 
+        {
+            return '<title>'.$att.'</title';
+        }
+        public function meta( $atts )
         {
 
         }

@@ -21,11 +21,15 @@ if ( !class_exists( 'Girl_Shortcode' ) ) {
             $size = count( $content );
 
             foreach( $content as $item ) {
-                
-                $items .= '{';
-                $items .= '"id":'.$i++.',';
-                $items .= '"photo":"'.esc_attr( $item ).'"';
-                $items .= '},';
+
+                if ( !empty( $item ) ) {
+                    $items .= '{';
+                    $items .= '"id":'.$i++.',';
+                    $items .= '"photo":"'.esc_attr( $item ).'"';
+                    $items .= '},';
+                } else {
+                    $items .= '';
+                }
             }
             ob_start();
             $out = '

@@ -2,6 +2,9 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
+//import field
+require_once ( N_EXTEND_FOLDER .'/includes/class/admin/custom-field.php' );
+
 /**
  * Custom Meta Box 
  * @link {https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/}
@@ -34,11 +37,21 @@ if ( !class_exists('Content_metabox') ) {
                 'normal', 
                 'default'
             );
+            add_meta_box(
+                '_meta_seo',
+                __( 'Thuộc Tính SEO' ),
+                array( $this, 'mb_callbackseo' ),
+                array( 'photo', 'page' ),
+                'normal', 
+                'default'
+            );
+        }
+        public function mb_callbackseo( $post ) 
+        {
+            wp_nonce_field( 'car_nonce_action', 'car_nonce' );
         }
         public function mb_callback( $post )
         {
-            //import field
-            require_once ( N_EXTEND_FOLDER .'/includes/class/admin/custom-field.php' );
 
             wp_nonce_field( 'car_nonce_action', 'car_nonce' );
 
