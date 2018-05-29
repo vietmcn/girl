@@ -50,7 +50,7 @@ if ( !class_exists('Content_thumbnail') ) {
                 'label'                 => __( 'Post Type', 'girl' ),
                 'description'           => __( 'Post Type Description', 'girl' ),
                 'labels'                => $labels,
-                'supports'              => array( 'title', 'editor' ),
+                'supports'              => array( 'title', 'editor', 'excerpt' ),
                 'taxonomies'            => array( 'category', 'post_tag' ),
                 'hierarchical'          => false,
                 'public'                => true,
