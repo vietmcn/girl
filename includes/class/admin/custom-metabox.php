@@ -15,11 +15,16 @@ if ( !class_exists('Content_metabox') ) {
     
     class Content_metabox
     {
+        protected $fields = NULL;
+        
         public function __construct()
         {
             add_action( 'add_meta_boxes',        array( $this, 'metabox_add'  ) );
             add_action( 'save_post',             array( $this, 'metabox_save'  ) );
             add_action( 'admin_footer',          array( $this, 'print_script' ) );
+
+            $this->fields = new Set_Field;
+
         }
         public function metabox_add()
         {
@@ -49,23 +54,46 @@ if ( !class_exists('Content_metabox') ) {
         public function mb_callbackseo( $post ) 
         {
             wp_nonce_field( 'car_nonce_action', 'car_nonce' );
-        }
-        public function mb_callback( $post )
-        {
-
-            wp_nonce_field( 'car_nonce_action', 'car_nonce' );
-
-            $field = new Set_Field;
             
-            $field->Metabox_field( array(
+            $this->fields->Metabox_field( array(
                 'type' => 'textbox',
                 'keyname' => '_meta_thumbnail',
                 'post_id' => $post->ID,
                 'content' => array(
-                    'id_1' => 'meta_thumbnail',
-                    'id_2' => 'meta_count',
-                    'id_3' => 'meta_filesize',
-                    'id_4' => 'meta_download',
+                    'id_1' => [
+                                'title' => 'Title Seo',
+                                'Desc'  => 'Thêm Tiêu Đề Dành Cho Content',
+                                'value' => 'meta_seo_title'
+                    ],
+                ),
+            ) );
+
+        }
+        public function mb_callback( $post )
+        {
+            wp_nonce_field( 'car_nonce_action', 'car_nonce' );
+            
+            $this->fields->Metabox_field( array(
+                'type' => 'textbox',
+                'keyname' => '_meta_thumbnail',
+                'post_id' => $post->ID,
+                'content' => array(
+                    'id_1' => [ 
+                                'title' => 'Thumbnail', 
+                                'value' => 'meta_thumbnail' 
+                    ],
+                    'id_2' => [ 
+                                'title' => 'Count Pic', 
+                                'value' => 'meta_count' 
+                    ],
+                    'id_3' => [
+                                'title' => 'File Size',
+                                'value' => 'meta_filesize'
+                    ],
+                    'id_4' => [
+                                'title' => 'File Download',
+                                'value' => 'meta_download' 
+                    ],
                 ),
             ) );
         }
@@ -101,20 +129,12 @@ if ( !class_exists('Content_metabox') ) {
             }
             // loop through fields and save the data
             
+                $new_Thumbnail = $_POST['_meta_thumbnail'];
+                $new_Seo       = $_POST['_meta_seo'];
 
-                $old = get_post_meta( $post_id, '_meta_thumbnail', false );
+                update_post_meta( $post_id, '_meta_thumbnail', $new_Thumbnail );
+                update_post_meta( $post_id, '_meta_seo', $new_Seo );
 
-                $new = $_POST['_meta_thumbnail'];
-
-                if ( $new && $new != $old ) {
-
-                    update_post_meta( $post_id, '_meta_thumbnail', $new );
-
-                } elseif ( '' == $new ) {
-
-                    delete_post_meta( $post_id, '_meta_thumbnail' );
-
-                }
         }
         public function print_script()
         {

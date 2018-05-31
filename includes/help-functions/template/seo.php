@@ -2,25 +2,30 @@
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
-add_action( 'girl_title', function() {
+add_action( 'girl_meta', function() {
     
-    global $struct;
-    if ( is_home() || is_front_page() ) {
-        $out  = $struct->title( get_bloginfo('title') );
-        $out .= $struct->meta( array( 
+    $struct = new Ninja_Structured;
+
+    if ( is_front_page() || is_home() ) {
+        
+        $out  = $struct->title('hello');
+        $out .= $struct->meta( array(
             'type' => 'facebook',
             'content' => array(
-                'locale' => 'en_US',
-                'app_id' => '',
-                'type' => '',
-                'url' => '',
-                'title' => '',
-                'image' => '',
-                'image_type' => '',
-                'image_url' => '',
+                'type' => 'website',
+                'url' => get_bloginfo( 'url' ),
+                'title' => 'Hello',
+                'image' => '//i.imgur.com/XlLGpii.jpg',
                 'desc' => '',
+                'app_id' => '',
             ),
         ) );
-        echo $out;
+
+    } elseif ( is_single() ) { 
+
+        $out = '';
+
     }
+    echo $out;
 } );
+

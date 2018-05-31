@@ -1,8 +1,9 @@
 <?php 
-if ( !defined('ABSPATH') ) {
+if ( ! defined( 'ABSPATH' ) ) :
     exit;
-}
-if (!class_exists( 'Ninja_Structured' ) ) {
+endif;
+
+if ( ! class_exists( 'Ninja_Structured' ) ) {
     class Ninja_Structured
     {
         /**
@@ -11,16 +12,20 @@ if (!class_exists( 'Ninja_Structured' ) ) {
         protected $atts = array();
         
         protected $att = NULL;
-        
+
         private function facebook( $atts )
         {
-            ?>
-            <meta property="og:url"                content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
-            <meta property="og:type"               content="article" />
-            <meta property="og:title"              content="When Great Minds Don’t Think Alike" />
-            <meta property="og:description"        content="How much does culture influence creative thinking?" />
-            <meta property="og:image"              content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
-            <?php
+            /**
+             * Object Facebook
+             * @since 1.0
+             * @author 
+             */
+            $out  = '<meta property="og:url" content="'.esc_url( $atts['url'] ).'" />';
+            $out .= '<meta property="og:type" content="'.esc_attr( $atts['type'] ).'" />';
+            $out .= '<meta property="og:title" content="'.esc_attr( $atts['title'] ).'" />';
+            $out .= '<meta property="og:description" content="'.esc_attr( $atts['desc'] ).'" />';
+            $out .= '<meta property="og:image" content="'.esc_url( $atts['image'] ).'" />';
+            return $out;
         }
         private function tw( $atts )
         {
@@ -36,7 +41,7 @@ if (!class_exists( 'Ninja_Structured' ) ) {
         }
         public function title( $att ) 
         {
-            return '<title>'.$att.'</title';
+            return '<title>'.$att.'</title>';
         }
         public function meta( $atts )
         {
@@ -58,4 +63,3 @@ if (!class_exists( 'Ninja_Structured' ) ) {
         }
     }
 }
-$struct = new Ninja_Structured;

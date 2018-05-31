@@ -11,7 +11,7 @@ require_once 'class/admin/_config.php'; //config admin
 require_once 'class/structured.php'; //Config SEO
 require_once 'class/paged.php'; //Config paged
 /**
- * import
+ * import functions
  * @since 1.0
  */
 require_once 'help-functions/req.php';
