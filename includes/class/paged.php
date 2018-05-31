@@ -150,7 +150,7 @@ if ( ! class_exists( 'App_paged' ) ) :
             }
 
             $fox_pageOut .= $prev;
-            $fox_pageOut .= '<span class="count-paged">(Page '.$paged.'/'.$numpages.')</span>';
+            $fox_pageOut .= '<span class="count-paged">( Page '.$paged.' )</span>';
             $fox_pageOut .= $next;
                 
             $fox_pageOut .= "</nav>";
