@@ -26,11 +26,27 @@ if ( !class_exists('Set_Field') ) {
             $i = 0;
             foreach ( $att as $key => $value ) {
                 $out  = '<label for ="'.$value['title'].'" class="">'.$value['title'].'</label>';
-                if ( empty( $meta ) ) {
-                    $out .= '<input class="'.$value['title'].'" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $keyname.'['.$value['value'].']' ).'" value="" />';
+                if ( $value['type'] == 'multi' ) {
+                    $multi = '[0]';
+                    $out .= '<span id="add-address" class="button_plus">+</span>';
                 } else {
-                    $val = $meta[$value['value'] ];
+                    $multi = '';
+                }
+                if ( empty( $meta ) ) {
+                    $out .= '<input class="'.$value['title'].'" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $keyname.'['.$value['value'].']'.$multi ).'" value="" />';
+                } else {
+                    $val = ( empty( $meta[$value['value'] ] ) ) ? $meta[$value['value']] : '';
                     $out .= '<input class="'.$value['title'].'" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $keyname.'['.$value['value'].']' ).'" value="'.$val.'" />';
+                    
+                    if ( $value['type'] == 'multi' ) {
+                        foreach ( $meta[$value] as $key => $value ) {  
+                            $out .= '<div class="address">';
+                            $out .= '<input style="margin: 5px 0px;" type="text" name="'.esc_attr( $keyname.'[meta_download]['.$i++.']' ).'" value="'.$value.'" />';
+                            $out .= '<span class="remove-address button_plus">-</span>';
+                            $out .= '</div>';
+                        }
+                    }
+
                 }
                 echo $out;
             }

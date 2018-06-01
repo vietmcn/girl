@@ -80,7 +80,7 @@ if ( !class_exists('Content_metabox') ) {
                 'content' => array(
                     'id_1' => [ 
                                 'title' => 'Thumbnail', 
-                                'value' => 'meta_thumbnail' 
+                                'value' => 'meta_thumbnail',
                     ],
                     'id_2' => [ 
                                 'title' => 'Count Pic', 
@@ -92,7 +92,8 @@ if ( !class_exists('Content_metabox') ) {
                     ],
                     'id_4' => [
                                 'title' => 'File Download',
-                                'value' => 'meta_download' 
+                                'value' => 'meta_download',
+                                'type'  => 'multi',
                     ],
                 ),
             ) );
