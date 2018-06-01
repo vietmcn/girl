@@ -25,15 +25,25 @@ if ( !class_exists('Set_Field') ) {
             $meta = get_post_meta( $post_id, $keyname, true );
             $i = 0;
             foreach ( $att as $key => $value ) {
-                if ( ! empty( $meta[$value] ) ) {
-                    $val = $meta[$value];
+                $out  = '<label for ="'.$value['title'].'" class="">'.$value['title'].'</label>';
+                if ( empty( $meta ) ) {
+                    $out .= '<input class="'.$value['title'].'" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $keyname.'['.$value['value'].']' ).'" value="" />';
                 } else {
-                    $val = '';
+                    $val = $meta[$value['value'] ];
+                    $out .= '<input class="'.$value['title'].'" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $keyname.'['.$value['value'].']' ).'" value="'.$val.'" />';
                 }
-                switch ( $key ) {
+                echo $out;
+            }
+        }
+    }
+    
+}
+/**
+ * switch ( $key ) {
+
                     case 'id_1' :
-                        $out  = '<label for ="'.$value.'" class="">Thumbnail</label>';
-                        $out .= '<input class="'.$value.'" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $keyname.'['.$value.']' ).'" value="'.$val.'" />';
+                        $out  = '<label for ="'.$value['title'].'" class="">Thumbnail</label>';
+                        $out .= '<input class="'.$value['title'].'" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $keyname.'['.$value.']' ).'" value="'.$val.'" />';
                         echo $out;
                         break;
                     case 'id_2' :
@@ -69,8 +79,4 @@ if ( !class_exists('Set_Field') ) {
                         break;
                     
                 }
-            }
-        }
-    }
-    
-}
+ */
