@@ -73,7 +73,7 @@ if ( !class_exists('Content_metabox') ) {
                 'content' => array(
                     'id_1' => [
                         'title' => 'Mô Tả SEO',
-                        'desc' => 'Mô Tả Dành Cho Content',
+                        'desc' => 'Mô tả ngắn là một đoạn mô tả về nội dung mà bạn tự nhập bằng tay, có thể được sử dụng để hiển thị trong giao diện của bạn. Xem thêm về mô tả ngắn.',
                         'value' => 'meta_seo_desc',
                     ],
                 ),

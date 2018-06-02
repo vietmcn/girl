@@ -37,7 +37,7 @@ if ( ! class_exists( 'Ninja_Structured' ) ) {
         }
         private function default( $atts )
         {
-
+            return '<meta property="fb:app_id" content="'.esc_attr( $atts['app_id'] ).'" />';
         }
         public function title( $att ) 
         {

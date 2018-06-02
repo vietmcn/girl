@@ -4,27 +4,38 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 add_action( 'girl_meta', function() {
     
+    global $post;
+
     $struct = new Ninja_Structured;
 
+    $meta = get_post_meta( $post->ID, '_meta_seo', true );
+
+    $out = $struct->meta([
+        'type' => '',
+        'content' => [
+            'app_id' => '123456789',
+        ],
+    ]);
+
     if ( is_front_page() || is_home() ) {
-        
-        $out  = $struct->title('hello');
-        $out .= $struct->meta( array(
+    
+        //Render Title
+        $out .= $struct->title( $meta['meta_seo_title'] );
+
+        $out .= $struct->meta( [
             'type' => 'facebook',
-            'content' => array(
+            'content' => [
                 'type' => 'website',
                 'url' => get_bloginfo( 'url' ),
-                'title' => 'Hello',
+                'title' => $meta['meta_seo_title'],
                 'image' => '//i.imgur.com/XlLGpii.jpg',
-                'desc' => '',
-                'app_id' => '',
-            ),
-        ) );
+                'desc' => $meta['meta_seo_desc'],
+            ],
+        ] );
+    } elseif ( is_category() || is_tag() ) {
 
-    } elseif ( is_single() ) { 
-
-        $out = '';
-
+    } elseif ( is_single() ) {
+        
     }
     echo $out;
 } );
