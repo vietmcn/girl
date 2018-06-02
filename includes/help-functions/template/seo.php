@@ -5,11 +5,12 @@ if ( !defined( 'ABSPATH' ) ) {
 add_action( 'girl_meta', function() {
     
     global $post;
-
+    //Gọi Structs
     $struct = new Ninja_Structured;
 
     $meta = get_post_meta( $post->ID, '_meta_seo', true );
 
+    //render All meta tag 
     $out = $struct->meta([
         'type' => '',
         'content' => [
