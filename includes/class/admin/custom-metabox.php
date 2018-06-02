@@ -56,14 +56,25 @@ if ( !class_exists('Content_metabox') ) {
             wp_nonce_field( 'car_nonce_action', 'car_nonce' );
             
             $this->fields->Metabox_field( array(
-                'type' => 'textbox',
-                'keyname' => '_meta_thumbnail',
+                'keyname' => '_meta_seo',
                 'post_id' => $post->ID,
                 'content' => array(
                     'id_1' => [
-                                'title' => 'Title Seo',
-                                'Desc'  => 'Thêm Tiêu Đề Dành Cho Content',
-                                'value' => 'meta_seo_title'
+                        'title' => 'Title Seo',
+                        'Desc'  => 'Thêm Tiêu Đề Dành Cho Content',
+                        'value' => 'meta_seo_title',
+                    ],
+                ),
+            ) );
+            $this->fields->Metabox_field( array(
+                'type' => 'textarea',
+                'keyname' => '_meta_seo',
+                'post_id' => $post->ID,
+                'content' => array(
+                    'id_1' => [
+                        'title' => 'Mô Tả SEO',
+                        'desc' => 'Mô Tả Dành Cho Content',
+                        'value' => 'meta_seo_desc',
                     ],
                 ),
             ) );
@@ -74,7 +85,6 @@ if ( !class_exists('Content_metabox') ) {
             wp_nonce_field( 'car_nonce_action', 'car_nonce' );
             
             $this->fields->Metabox_field( array(
-                'type' => 'textbox',
                 'keyname' => '_meta_thumbnail',
                 'post_id' => $post->ID,
                 'content' => array(
