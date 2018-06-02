@@ -13,31 +13,32 @@ if ( ! class_exists( 'Ninja_Structured' ) ) {
         
         protected $att = NULL;
 
-        private function facebook( $atts )
+        function facebook( $atts ) 
         {
-            /**
-             * Object Facebook
-             * @since 1.0
-             * @author 
-             */
-            $out  = '<meta property="og:url" content="'.esc_url( $atts['url'] ).'" />';
-            $out .= '<meta property="og:type" content="'.esc_attr( $atts['type'] ).'" />';
-            $out .= '<meta property="og:title" content="'.esc_attr( $atts['title'] ).'" />';
-            $out .= '<meta property="og:description" content="'.esc_attr( $atts['desc'] ).'" />';
-            $out .= '<meta property="og:image" content="'.esc_url( $atts['image'] ).'" />';
+            $out = '<meta property="fb:app_id" content="'.esc_attr( $atts['app_id'] ).'" />';
             return $out;
         }
-        private function tw( $atts )
+        function tw( $atts )
         {
-
+            $out  = '<meta name="twitter:card" content="'.esc_attr( $atts['card'] ).'" />';
+            $out .= '<meta name="twitter:site" content="@'.esc_attr( $atts['site'] ).'" />';
+            $out .= '<meta name="twitter:creator" content="@'.esc_attr( $atts['creator'] ).'" />';
+            return $out;
         }
-        private function pint( $atts )
+        function default( $router, $atts )
         {
-
-        }
-        private function default( $atts )
-        {
-            return '<meta property="fb:app_id" content="'.esc_attr( $atts['app_id'] ).'" />';
+            $out  = '<meta property="og:type" content="'.esc_attr( $atts['web_type'] ).'" />';
+            $out .= '<meta property="og:title" content="'.esc_attr( $atts['title'] ).'" />';
+            $out .= '<meta property="og:description" content="'.esc_attr( $atts['desc'] ).'" />';
+            $out .= '<meta property="og:url" content="'.esc_attr( $atts['url'] ).'" />';
+            $out .= '<meta property="og:site_name" content="'.esc_attr( $atts['site_name'] ).'" />';
+            $out .= '<meta property="og:locale" content="'.esc_attr( $atts['locale'] ).'" />';
+            if ( !empty( $router ) == 'single' ) {
+                $out .= '<meta property="article:published_time" content="'.esc_attr( $atts['time_public'] ).'" />';
+                $out .= '<meta property="article:author" content="'.esc_attr( $atts['author'] ).'" />';
+            }
+            $out .= '<meta property="og:image" content="'.esc_attr( $atts['image'] ).'" />';
+            return $out;
         }
         public function title( $att ) 
         {
@@ -45,20 +46,9 @@ if ( ! class_exists( 'Ninja_Structured' ) ) {
         }
         public function meta( $atts )
         {
-            switch ( $atts['type'] ) {
-                case 'facebook':
-                    $out = $this->facebook( $atts['content'] );
-                    break;
-                case 'tw':
-                    $out = $this->tw( $atts['content'] );
-                    break;
-                case 'pint':
-                    $out = $this->pint( $atts['content'] );
-                    break;
-                default:
-                    $out = $this->default( $atts['content'] );
-                    break;
-            }
+            $out  = $this->facebook( $atts['content'] );
+            $out .= $this->tw( $atts['content'] );
+            $out .= $this->default( $atts['router'], $atts['content'] );
             return $out;
         }
     }
