@@ -37,9 +37,9 @@ if ( ! class_exists( 'Ninja_Structured' ) ) {
 
             switch ( $router ) {
                 case 'single':
-                $out .= '<meta property="article:published_time" content="'.$atts['time_public'].'" />';
-                $out .= '<meta property="article:section" content="'.esc_attr( $att['cat'] ).'"/>';
-                $out .= '<meta property="article:tag" content="'.esc_attr( $att['tag'] ).'"/>';
+                $out .= '<meta property="article:published_time" content="'.$atts['public_time'].'" />';
+                $out .= '<meta property="article:section" content="'.esc_attr( $atts['cat'] ).'"/>';
+                $out .= '<meta property="article:tag" content="'.esc_attr( $atts['tag'] ).'"/>';
                 $out .= '<meta property="article:author" content="'.esc_attr( $atts['author'] ).'" />';
                     break;
             }
