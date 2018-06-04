@@ -1,29 +1,7 @@
-<?php 
+<?php
 if ( ! defined( 'ABSPATH' ) ) :
     exit;
 endif;
-
-add_action( 'pre_get_posts', function( $query ) {
-    /**
-    * Set Pre Post
-    * @link {}
-    * @since 1.0
-    * @author Girl 
-    */
-    if ( $query->is_main_query() && !$query->is_feed() && !is_admin() && is_category() ) {
-
-        $query->set('page_cat', get_query_var('paged'));
-
-        $query->set( 'paged', 0 );
-
-    } elseif ( $query->is_main_query() && !$query->is_feed() && !is_admin() && is_tag() ) {
-
-        $query->set( 'page_tag', get_query_var('paged') );
-
-        $query->set( 'paged', 0 );
-
-    }
-} );
 
 if ( ! class_exists( 'App_paged' ) ) :
 

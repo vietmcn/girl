@@ -14,6 +14,7 @@ if ( !class_exists('Content_thumbnail') ) {
         public function __construct()
         {
             add_action( 'init', array( $this, 'Thumbnail' ), 0 );
+            add_action( 'pre_get_posts', array( $this, 'pre_get_post' ) );
         }
         public function Thumbnail() {
 
@@ -62,15 +63,30 @@ if ( !class_exists('Content_thumbnail') ) {
                 'menu_icon'             => 'dashicons-format-gallery',
                 'can_export'            => true,
                 'has_archive'           => true,
-                'exclude_from_search'   => false,
+                'exclude_from_search'   => true,
                 'publicly_queryable'    => true,
                 'rewrite'               => array(
                                                 'slug'       => 'photo', // if you need slug
-                                                'with_front' => true,
+                                                'with_front' => false,
                                         ),
                 'capability_type'       => 'post',
             );
             register_post_type( 'photo', $args );
+        }
+        public function pre_get_post( $query ) 
+        {
+            /**
+            * Set Pre Post
+            * @link {}
+            * @since 1.0
+            * @author Girl 
+            */
+            if ( $query->is_main_query() && !$query->is_feed() && !is_admin() && ( is_category() || is_tag() ) ) {
+                $query->set( 'page_cat', get_query_var('paged') );
+                $query->set( 'page_tag', get_query_var('paged') );
+                $query->set( 'post_type', array( 'photo' ) );
+                $query->set( 'paged', 0 );
+            }
         }
     }
 }

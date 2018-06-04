@@ -15,6 +15,8 @@ import_template( 'seo' );
 import_template( 'content' );
 //Page Archive 
 import_template( 'content-archive' );
+//Page Tag 
+import_template( 'content-tag' );
 //Page Download
 import_template( 'content-download' );
 //single

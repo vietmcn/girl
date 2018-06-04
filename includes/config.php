@@ -8,8 +8,9 @@ if ( !defined('ABSPATH') ) {
  * @author Trangfox
  */
 require_once 'class/admin/_config.php'; //config admin
-require_once 'class/structured.php'; //Config SEO
+require_once 'class/content.php'; //Get content;
 require_once 'class/paged.php'; //Config paged
+require_once 'class/structured.php'; //Config SEO
 /**
  * import functions
  * @since 1.0

@@ -39,13 +39,19 @@ if ( ! defined( 'N_EXTEND_FOLDER' ) ) {
  * @since 1.0
  */
 if ( ! function_exists( 'import_template' ) ) {
-	function import_template( $name = NULL ) {
+	function import_template( $name = NULL ) 
+	{
 		$inc = 'includes';
 		$template = 'help-functions/template';
 		require_once ( N_EXTEND_FOLDER .'/'.$inc.'/'.$template.'/'.$name.'.php' );
 	}
 }
-
+if ( !function_exists( '_render' ) ) {
+	function _render( $att = NULL )
+	{
+		echo $att;
+	}
+} 
 /**
  * GET the Version Template
  *
