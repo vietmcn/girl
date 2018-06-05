@@ -2,6 +2,18 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
+add_action( 'girl_meta', function() {
+    if ( is_single() || is_singular() ) {
+        
+        global $struct;
+
+        _render( $struct->meta( [
+            'content' => [
+                'locale' => 'en_GB',
+            ],
+        ] ) );
+    }
+} );
 add_action( 'wp_enqueue_scripts', function() {
     /**
      * Get Photo 

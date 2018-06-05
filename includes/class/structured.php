@@ -27,6 +27,30 @@ if ( ! class_exists( 'Ninja_Structured' ) ) {
         }
         function default( $router, $atts )
         {
+            $default = [
+                'router' => '',
+                'content' => [
+                    'locale'       => 'en_GB',
+                    'meta_title'   => '',
+                    'web_type'     => '',
+                    'url'          => '',
+                    'meta_title'   => '',
+                    'image'        => '',
+                    'desc'         => '',
+                    'site_name'    => '',
+                    //Facebook
+                    'app_id'       => '',
+                    //Twitter
+                    'card'         => '',
+                    'creator'      => '',
+                    'cat'          => '',
+                    'tag'          => '',
+                    'author'       => '',
+                    'public_time'  => '',
+                ],
+            ];
+            $atts = array_replace_recursive( $default, $atts );
+            
             $out  = '<meta property="og:locale" content="'.esc_attr( $atts['locale'] ).'" />';
             $out .= '<meta property="og:type" content="'.esc_attr( $atts['web_type'] ).'" />';
             $out .= '<meta property="og:title" content="'.esc_attr( $atts['meta_title'] ).'" />';
@@ -51,11 +75,13 @@ if ( ! class_exists( 'Ninja_Structured' ) ) {
         }
         public function meta( $atts )
         {
-            $out  = $this->title( $atts['content']['meta_title'] );
-            $out .= $this->facebook( $atts['content'] );
+            #$out  = $this->title( $array['content']['meta_title'] );
+            #$out .= $this->facebook( $atts['content'] );
             $out .= $this->default( $atts['router'], $atts['content'] );
-            $out .= $this->tw( $atts['content'] );
+            #$out .= $this->tw( $atts['content'] );
             return $out;
         }
     }
 }
+
+$struct = new Ninja_Structured;

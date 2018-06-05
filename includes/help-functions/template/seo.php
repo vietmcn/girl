@@ -22,7 +22,7 @@ add_action( 'girl_meta', function() {
         $seo['meta_title'] = ( !empty( $meta_seo['meta_seo_title'] ) ) ? $meta_seo['meta_seo_title'] : get_bloginfo('name');
         $seo['web_type'] = 'website';
         $seo['url'] = get_bloginfo( 'url' );
-        $seo['image'] = '//i.imgur.com/P8ft42T.jpg';
+        $seo['image'] = 'https://i.imgur.com/P8ft42T.jpg';
         $seo['desc'] = ( !empty( $meta_seo['meta_seo_desc'] ) ) ? $meta_seo['meta_seo_desc'] : get_bloginfo('description');
         
     } elseif ( is_category() ) {
@@ -61,12 +61,20 @@ add_action( 'girl_meta', function() {
         $seo['author'] = 'trangfox.com';
         $seo['public_time'] = get_the_date( 'c', $post->ID );
 
+    } elseif ( is_page('dw') ) {
+
+        $seo['web_type'] = 'object';
+        $seo['meta_title'] = 'Paged Not Found - Trangfox.Com';
+        $seo['url'] = get_bloginfo('url');
+        $seo['image'] = 'https://i.imgur.com/P8ft42T.jpg';
+        $seo['desc'] = 'Oop!! I did not find the page you were looking.';
+
     } else {
 
         $seo['web_type'] = 'object';
         $seo['meta_title'] = 'Paged Not Found - Trangfox.Com';
         $seo['url'] = get_bloginfo('url');
-        $seo['image'] = '//i.imgur.com/P8ft42T.jpg';
+        $seo['image'] = 'https://i.imgur.com/P8ft42T.jpg';
         $seo['desc'] = 'Oop!! I did not find the page you were looking.';
         
     }
