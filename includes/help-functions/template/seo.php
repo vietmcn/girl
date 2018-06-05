@@ -89,7 +89,7 @@ add_action( 'girl_meta', function() {
                 //Facebook
                 'app_id'       => $seo['app_id'],
                 //Twitter
-                'card'         => 'summy',
+                'card'         => 'summary_large_image',
                 'creator'      => 'trangfox_',
                 'cat'          => ( !empty( $seo['cat'] ) ) ? $seo['cat'] : '',
                 'tag'          => ( !empty( $seo['tag'] ) ) ? $seo['tag'] : '',

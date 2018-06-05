@@ -23,3 +23,5 @@ import_template( 'content-download' );
 import_template( 'content-single' );
 //Footer
 import_template( 'footer' );
+//404
+import_template( '404' );

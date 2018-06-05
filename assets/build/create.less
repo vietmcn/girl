@@ -282,3 +282,38 @@ body {
         }
     }
 }
+//404
+div.page_404 {
+    
+    .image-404 {
+        position: relative;
+        margin: 0px;
+        img {
+            width: 100%;
+        }
+    }
+    .image-404::before {
+        content: "";
+        background: #fff;
+    }
+    figcaption {
+        position: absolute;
+        bottom: 10vw;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        h2 {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #fff;
+            border: 1px solid #d4d0d0;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 90%;
+            text-decoration: none;
+        }
+    }
+}
