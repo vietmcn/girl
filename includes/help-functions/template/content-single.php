@@ -3,17 +3,38 @@ if ( !defined('ABSPATH') ) {
     exit;
 }
 add_action( 'girl_meta', function() {
-    if ( is_single() || is_singular() ) {
         
-        global $struct;
+    if ( is_single() && is_singular() ) {
 
+        global $struct, $post;
+
+        $meta = get_post_meta( $post->ID, '_meta_seo', true );
+        $meta_post = get_post_meta( $post->ID, '_meta_thumbnail', true );
+        $site_name = explode( '//', get_bloginfo('url') );
+        $cat = get_the_category( $post->ID );
+        $tag = get_the_tags( $post->ID );
         _render( $struct->meta( [
+            'router' => 'single',
             'content' => [
+                'web_type' => 'article',
+                'meta_title' => ( !empty( $meta['meta_seo_title'] ) ) ? $meta['meta_seo_title'] : get_bloginfo('name'),
+                'site_name' => $site_name[1],
+                'image' => $meta_post['meta_thumbnail'],
+                'fb_id' => '12233',
                 'locale' => 'en_GB',
-            ],
-        ] ) );
+                'desc' => ( !empty( $meta['meta_seo_desc'] ) ) ? $meta['meta_seo_desc'] : get_bloginfo('description'),
+                'url' => get_bloginfo('url'),
+                'card' => 'summary_large_image',
+                'creator' => 'trangfox.com',
+                'public_time' => get_the_date( 'c', $post->ID ),
+                'cat' => $cat[0]->name,
+                'tag' => $tag[0]->name,
+                'author' => 'trangfox.com',
+                ],
+            ] ) 
+        );
     }
-} );
+});
 add_action( 'wp_enqueue_scripts', function() {
     /**
      * Get Photo 
@@ -90,7 +111,7 @@ add_action( 'girl_single', function() {
                 $meta = get_post_meta( $Query->post->ID, '_meta_thumbnail', true );
     
                 $out .= '<li data-id="'.$Query->post->ID.'" class="thumbnail-class">';
-                $out .= '<h3><a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a></h3>';
+                $out .= '<h2><a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a></h2>';
                 $out .= '<figure><a href="'.get_permalink().'" title="'.get_the_title().'">';
                 $out .= '<img class="thumbnail-item" src="'.$meta['meta_thumbnail'].'" alt="'.get_the_title().'" />';
                 $out .= '</a></figure>';

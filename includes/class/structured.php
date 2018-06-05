@@ -13,44 +13,8 @@ if ( ! class_exists( 'Ninja_Structured' ) ) {
         
         protected $att = NULL;
 
-        function facebook( $atts ) 
-        {
-            $out = '<meta property="fb:app_id" content="'.esc_attr( $atts['app_id'] ).'" />';
-            return $out;
-        }
-        function tw( $atts )
-        {
-            $out  = '<meta name="twitter:card" content="'.esc_attr( $atts['card'] ).'" />';
-            $out .= '<meta name="twitter:site" content="@'.esc_attr( $atts['site_name'] ).'" />';
-            $out .= '<meta name="twitter:creator" content="@'.esc_attr( $atts['creator'] ).'" />';
-            return $out;
-        }
         function default( $router, $atts )
-        {
-            $default = [
-                'router' => '',
-                'content' => [
-                    'locale'       => 'en_GB',
-                    'meta_title'   => '',
-                    'web_type'     => '',
-                    'url'          => '',
-                    'meta_title'   => '',
-                    'image'        => '',
-                    'desc'         => '',
-                    'site_name'    => '',
-                    //Facebook
-                    'app_id'       => '',
-                    //Twitter
-                    'card'         => '',
-                    'creator'      => '',
-                    'cat'          => '',
-                    'tag'          => '',
-                    'author'       => '',
-                    'public_time'  => '',
-                ],
-            ];
-            $atts = array_replace_recursive( $default, $atts );
-            
+        {  
             $out  = '<meta property="og:locale" content="'.esc_attr( $atts['locale'] ).'" />';
             $out .= '<meta property="og:type" content="'.esc_attr( $atts['web_type'] ).'" />';
             $out .= '<meta property="og:title" content="'.esc_attr( $atts['meta_title'] ).'" />';
@@ -58,7 +22,10 @@ if ( ! class_exists( 'Ninja_Structured' ) ) {
             $out .= '<meta property="og:url" content="'.esc_attr( $atts['url'] ).'" />';
             $out .= '<meta property="og:site_name" content="'.esc_attr( $atts['site_name'] ).'" />';
             $out .= '<meta property="og:image" content="'.esc_attr( $atts['image'] ).'" />';
-
+            $out .= '<meta property="fb:app_id" content="'.esc_attr( $atts['fb_id'] ).'" />';
+            $out .= '<meta name="twitter:card" content="'.esc_attr( $atts['card'] ).'" />';
+            $out .= '<meta name="twitter:site" content="@'.esc_attr( $atts['site_name'] ).'" />';
+            $out .= '<meta name="twitter:creator" content="@'.esc_attr( $atts['creator'] ).'" />';
             switch ( $router ) {
                 case 'single':
                 $out .= '<meta property="article:published_time" content="'.$atts['public_time'].'" />';
@@ -75,10 +42,8 @@ if ( ! class_exists( 'Ninja_Structured' ) ) {
         }
         public function meta( $atts )
         {
-            #$out  = $this->title( $array['content']['meta_title'] );
-            #$out .= $this->facebook( $atts['content'] );
+            $out  = $this->title( $atts['content']['meta_title'] );
             $out .= $this->default( $atts['router'], $atts['content'] );
-            #$out .= $this->tw( $atts['content'] );
             return $out;
         }
     }
