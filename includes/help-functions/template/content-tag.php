@@ -5,7 +5,7 @@ if ( !defined('ABSPATH') ) {
 add_action( 'girl_archive', function(){
     if ( is_tag() ) {
         global $getContent, $pageds;
-        $paged = (get_query_var( 'page_tag' )) ? get_query_var( 'page_tag' ) : 1;
+        $paged = ( get_query_var( 'page_tag' ) ) ? get_query_var( 'page_tag' ) : 1;
         $out  = '<div id="content" class="container">';
         $out .= $getContent::Content( [
             'post_type' => 'photo',
