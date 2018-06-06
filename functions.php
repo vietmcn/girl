@@ -46,8 +46,8 @@ if ( ! function_exists( 'import_template' ) ) {
 		require_once ( N_EXTEND_FOLDER .'/'.$inc.'/'.$template.'/'.$name.'.php' );
 	}
 }
-if ( !function_exists( '_render' ) ) {
-	function _render( $att = NULL )
+if ( !function_exists( '__render' ) ) {
+	function __render( $att = NULL )
 	{
 		echo $att;
 	}

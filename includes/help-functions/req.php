@@ -12,7 +12,7 @@ import_template( 'header' );
 //Import SEO
 #import_template( 'seo' );
 //Page Content
-import_template( 'content' );
+import_template( 'content-front' );
 //Page Archive 
 import_template( 'content-archive' );
 //Page Tag 

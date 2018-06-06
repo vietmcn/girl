@@ -13,26 +13,7 @@ add_action( 'girl_meta', function() {
         $site_name = explode( '//', get_bloginfo('url') );
         $cat = get_the_category( $post->ID );
         $tag = get_the_tags( $post->ID );
-        _render( $struct->meta( [
-            'router' => 'single',
-            'content' => [
-                'web_type' => 'article',
-                'meta_title' => ( !empty( $meta['meta_seo_title'] ) ) ? $meta['meta_seo_title'] : get_bloginfo('name'),
-                'site_name' => $site_name[1],
-                'image' => $meta_post['meta_thumbnail'],
-                'fb_id' => '12233',
-                'locale' => 'en_GB',
-                'desc' => ( !empty( $meta['meta_seo_desc'] ) ) ? $meta['meta_seo_desc'] : get_bloginfo('description'),
-                'url' => get_bloginfo('url'),
-                'card' => 'summary_large_image',
-                'creator' => 'trangfox.com',
-                'public_time' => get_the_date( 'c', $post->ID ),
-                'cat' => $cat[0]->name,
-                'tag' => $tag[0]->name,
-                'author' => 'trangfox.com',
-                ],
-            ] ) 
-        );
+       
     }
 });
 add_action( 'wp_enqueue_scripts', function() {
