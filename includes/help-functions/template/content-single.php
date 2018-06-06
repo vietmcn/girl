@@ -2,13 +2,6 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
-add_filter( 'meta_titles', function( $att ) {
-    if ( is_single() && is_front_page() ) {
-        global $post;
-        $meta_post = get_post_meta( $post->ID, '_meta_thumbnail', true );
-        return ( !empty( $meta_post['meta_seo_title'] ) ) ? $meta_post['meta_seo_title'] : get_the_title( $post->ID );
-    }
-} );
 add_action( 'girl_meta', function() {
         
     if ( is_single() && is_singular() ) {

@@ -72,17 +72,27 @@ if ( !class_exists('Set_Field') ) {
                      * @author ninjafox
                      */
                     $val = ( !empty( $meta[$value['value'] ] ) ) ? $meta[$value['value']] : '';
+
                     if ( !empty( $meta[$value['value'] ] ) ) {
+
                         if ( !empty( $value['type'] ) == 'multi' ) {
-                            foreach ($val as  $values) {
+
+                            foreach ( $val as  $values ) {
                                 $out .= '<div class="address">';
                                 $out .= '<input style="margin: 5px 0px;" type="text" name="'.esc_attr( $keyname.'['.$value['value'].']['.$i++.']' ).'" value="'.$values.'" />';
                                 $out .= '<span class="remove-address button_plus">-</span>';
                                 $out .= '</div>';   
                             }
+                            
                         } else {
+
                             $out .= '<input class="'.$value['title'].'" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $keyname.'['.$value['value'].']' ).'" value="'.$val.'" />';
+                        
                         }
+                    } else {
+
+                        $out .= '<input class="'.$value['title'].'" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $keyname.'['.$value['value'].']' ).'" value="'.$val.'" />';
+                    
                     }
                 }
                 $out .= $div_end;

@@ -28,7 +28,6 @@ add_action( 'girl_meta', function() {
         $site_name = explode( '//', get_bloginfo('url') );
         $cat = get_the_category( $post_id );
         $tag = get_the_tags( $post_id );
-        
     }
 });
 add_action( 'girl_page', function() {

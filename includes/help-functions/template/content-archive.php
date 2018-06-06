@@ -2,6 +2,7 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
+
 add_action( 'girl_archive', function(){
 
     if ( is_category() ) {

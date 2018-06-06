@@ -7,10 +7,10 @@ if( !defined('ABSPATH') ) {
  * @since 1.0
  * @author Trangfox
  */
+//Title
+import_template( 'title' );
 //Header
 import_template( 'header' );
-//Import SEO
-#import_template( 'seo' );
 //Page Content
 import_template( 'content-front' );
 //Page Archive 
