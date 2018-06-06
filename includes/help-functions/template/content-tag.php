@@ -59,6 +59,6 @@ add_action( 'girl_archive', function(){
             'cat' => '',
         ] );
         $out .= '</div>';
-        echo $out;
+        __render( $out );
     }
 } );

@@ -90,7 +90,7 @@ add_action( 'girl_page', function() {
             }
             $out .= '</div>';    
             
-            echo $out;
+            __render( $out );
         
         } else {
             

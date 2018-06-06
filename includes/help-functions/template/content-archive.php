@@ -19,6 +19,6 @@ add_action( 'girl_archive', function(){
             'cat' => get_query_var( 'cat' ),
         ] );
         $out .= '</div>';
-        echo $out;
+        __render( $out );
     }
 } );

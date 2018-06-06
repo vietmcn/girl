@@ -15,7 +15,7 @@
  */ ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> prefix="og:http://ogp.me/ns#" class="no-js">
 <head>
-<title><?php echo apply_filters( 'meta_title', $att = '' );?></title>
+<title><?php echo apply_filters( 'meta_titles', $att = '' );?></title>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <?php do_action( 'girl_meta' );?>

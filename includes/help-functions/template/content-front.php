@@ -47,7 +47,7 @@ add_action( 'girl_page', function() {
         global $getContent, $pageds;
 
         $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
-        _render( $getContent::Content( [
+        __render( $getContent::Content( [
             'post_type' => 'photo',
             'per_page' => '10',
             'paged' => $paged,
