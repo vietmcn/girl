@@ -4,32 +4,7 @@ if ( !defined('ABSPATH') ) {
 }
 add_action( 'girl_meta', function() {
         
-    if ( is_single() && is_singular() ) {
-
-        global $struct, $post;
-
-        $meta = get_post_meta( $post->ID, '_meta_seo', true );
-        $meta_post = get_post_meta( $post->ID, '_meta_thumbnail', true );
-        $site_name = explode( '//', get_bloginfo('url') );
-        $cat = get_the_category( $post->ID );
-        $tag = get_the_tags( $post->ID );
-
-        //render
-        $out  = $struct->info( [
-            'title' => ( !empty( $meta['meta_seo_title'] ) ) ? $meta['meta_seo_title'] : get_the_title( $post->ID ),
-            'desc' => ( !empty( $meta['meta_seo_desc'] ) ) ? $meta['meta_seo_desc'] : get_the_excerpt( $post->ID ),
-            'image' => ( !empty( $meta_post['meta_thumbnail'] ) ) ? $meta_post['meta_thumbnail'] : '',
-            'web_type' => 'article',
-            'url' => get_the_permalink( $post->ID ),
-        ] );
-        $out .= $struct->single( [
-            'cat' => $cat[0]->name,
-            'tag' => $tag[0]->name,
-            'public_time' => get_the_date( 'c', $post->ID ),
-            'author' => 'trangfox.com'
-        ] );
-        __render( $out );
-    }
+    
 });
 add_action( 'wp_enqueue_scripts', function() {
     /**

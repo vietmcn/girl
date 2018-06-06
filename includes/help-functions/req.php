@@ -8,7 +8,7 @@ if( !defined('ABSPATH') ) {
  * @author Trangfox
  */
 //Title
-import_template( 'title' );
+import_template( 'struct' );
 //Header
 import_template( 'header' );
 //Page Content
