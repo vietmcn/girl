@@ -13,7 +13,8 @@ if ( ! class_exists( 'Ninja_Structured' ) ) {
 
         public function info( $atts )
         {
-            $out  = '<meta property="og:type" content="'.esc_attr( $atts['web_type'] ).'" />';
+            $out  = '<meta name="description" content="'.esc_attr( $atts['desc'] ).'"/>';
+            $out .= '<meta property="og:type" content="'.esc_attr( $atts['web_type'] ).'" />';
             $out .= '<meta property="og:title" content="'.esc_attr( $atts['title'] ).'" />';
             $out .= '<meta property="og:description" content="'.esc_attr( $atts['desc'] ).'" />';
             $out .= '<meta property="og:url" content="'.esc_attr( $atts['url'] ).'" />';
