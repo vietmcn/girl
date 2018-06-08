@@ -98,7 +98,7 @@ add_action( 'girl_meta', function() {
         __render( $struct->info( [
             'url' => get_bloginfo( 'url' ),
             'web_type' => 'website',
-            'image' => '',
+            'image' => 'https://i.imgur.com/XlLGpii.jpg',
             'title' => ( !empty( $meta['meta_seo_title'] ) ) ? $meta['meta_seo_title'] : get_bloginfo('name'),
             'desc' => ( !empty( $meta['meta_seo_desc'] ) ) ? $meta['meta_seo_desc'] : get_bloginfo('description'),
         ] ) );
@@ -130,10 +130,52 @@ add_action( 'girl_meta', function() {
     }
     __render( $struct->default( [
         'locale' => 'en_GB',
-        'fb_id' => '123123',
+        'fb_id' => '',
         'card' => 'summary_large_image',
         'creator' => 'trangfox.com',
         'site_name' => $site_name[1],
     ] ) );
     
 });
+
+add_action( 'wp_head', function() {
+    
+    global $struct, $post;
+
+    $logo = $struct->logo( [
+        'logo' => get_template_directory_uri().'/assets/img/logo.jpg',
+        'url' => get_bloginfo('url'),
+    ] );
+    ?><script type="application/ld+json"><?php echo $logo; ?> </script><?php 
+
+    if ( is_single() && is_singular() ) {
+
+        $meta = get_post_meta( $post->ID, '_meta_thumbnail', true );
+        $meat_post = get_post_meta( $post->ID, '_meta_seo', true );
+
+        $bread = $struct->breadcrumb( [
+            'id_1' => [
+                'id' => '1',
+                'name' => 'trangfox',
+                'image' => 'https://i.imgur.com/XlLGpii.jpg',
+            ],
+            'id_2' => [
+                'id' => '2',
+                'name' => ( !empty( $meta_post['meta_seo_title'] ) ) ? esc_attr( $meta_post['meta_seo_title'] ) : get_the_title( $post->ID ),
+                'image' => esc_url( $meta['meta_thumbnail'] ),
+            ]
+        ] );
+        $single_post = $struct->single_post( [
+            'url' => get_permalink( $post->ID ),
+            'title' => ( !empty( $meta_post['meta_seo_title'] ) ) ? esc_attr( $meta_post['meta_seo_title'] ) : get_the_title( $post->ID ),
+            'image' => esc_url( $meta['meta_thumbnail'] ),
+            'author' => 'trangfox.com',
+            'public_date' => get_the_date( 'c', $post->ID ),
+            'public_date_mod' => get_the_modified_date( 'c', $post->ID ),
+            'public_name' => 'tranfox.com',
+            'logo' => get_template_directory_uri().'/assets/img/logo.jpg',
+        ] );
+        ?><script type="application/ld+json"><?php echo $bread; ?> </script><script type="application/ld+json"><?php echo $single_post; ?> </script><?php 
+    }
+
+} );
