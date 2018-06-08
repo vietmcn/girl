@@ -23,18 +23,24 @@ add_action( 'girl_header', function() {
      * @since 1.0
      * @author Trangfox
      */
+    global $mobile;
+
     if ( ! is_single() ) {
         $container = 'h1';
     } else {
         $container = 'div';
     }
-    $out  = '<div id="header-top" class="flex">';
-    $out .= '<span class="account flex"><ion-icon name="contact"></ion-icon></span>';
-    $out .= '<'.$container.' class="flex logo">';
-    $out .= '<a href="/" title="Home">Trangfox.com</a>';
-    $out .= '</'.$container.'>';
-    $out .= '<span class="search flex"><ion-icon name="search"></ion-icon></span>';
-    $out .= '</div>';
+    if ( $mobile->isMobile() && !$mobile->isTablet() ) {
+        $out  = '<div id="header-top" class="flex">';
+        $out .= '<span class="account flex"><ion-icon name="contact"></ion-icon></span>';
+        $out .= '<'.$container.' class="flex logo">';
+        $out .= '<a href="/" title="Home">Trangfox.com</a>';
+        $out .= '</'.$container.'>';
+        $out .= '<span class="search flex"><ion-icon name="search"></ion-icon></span>';
+        $out .= '</div>';
+    } else {
+        $out = '<logo>Trangfox.com</logo>';
+    }
     echo $out;
 } );
 add_action( 'girl_header', function() {
@@ -44,14 +50,16 @@ add_action( 'girl_header', function() {
      * @since 1.0
      * @author Trangfox
      */
-    $out = wp_nav_menu( array(
-        'echo' => false,
-        'menu' => 'Header Menu',
-        'theme_location' => 'primary',
-        'container' => 'nav',
-        'container_class' => 'bg-menu bg-header',
-    ) );
-    echo $out;
+    global $mobile;
+    if ($mobile->isMobile() && !$mobile->isTablet()) {
+        echo wp_nav_menu( array(
+            'echo' => false,
+            'menu' => 'Header Menu',
+            'theme_location' => 'primary',
+            'container' => 'nav',
+            'container_class' => 'bg-menu bg-header',
+        ) );
+    }
 } );
 add_action( 'girl_header', function() {
     /**

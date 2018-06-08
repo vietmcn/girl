@@ -7,6 +7,7 @@ if ( !defined('ABSPATH') ) {
  * @since 1.0
  * @author Trangfox
  */
+require_once 'class/mobile-detect.php'; //check device
 require_once 'class/admin/_config.php'; //config admin
 require_once 'class/content.php'; //Get content;
 require_once 'class/paged.php'; //Config paged
@@ -98,11 +99,14 @@ add_action( 'wp_enqueue_scripts', function() {
 	 * @since 1.0
 	 * @author Trangfox
 	 */
-	global $ver;
+	global $ver, $mobile;
 	wp_enqueue_style( 'girl', get_template_directory_uri().'/style.css', $ver, 'all' );
-	#if ( wp_is_mobile() ) {
-		wp_enqueue_style( 'screen-small', get_template_directory_uri().'/assets/css/screensmall.min.css', $ver, 'all' );
-	#}
+
+	if ( $mobile->isMobile() && !$mobile->isTablet() ) {
+		wp_enqueue_style( 'screen-small', get_template_directory_uri().'/assets/css/screensmall.min.css', 'all' , $ver );
+	} else {
+		wp_enqueue_style( 'screen-small', get_template_directory_uri().'/assets/css/screenlarge.min.css', 'all', $ver );
+	}
 	/**
 	 * Font Google 
 	 * @since 1.0
