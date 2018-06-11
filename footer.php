@@ -13,5 +13,4 @@
  * @subpackage Girl
  * @since Girl 1.0
  */?>
-<?php do_action('girl_footer');?>
-</main></div><?php wp_footer();?></body></html>
+</main><?php do_action('girl_footer');?></div><?php wp_footer();?></body></html>

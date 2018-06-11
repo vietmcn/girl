@@ -23,7 +23,7 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 <?php wp_head();?>
 </head>
-<body <?php body_class(); ?>>
-<div class="container">
+<body class="trangfox" ninja-body>
+<div class="container <?php ninja_class();?> ninja-body">
 <header id="girl-header"><?php do_action( 'girl_header' );?></header>
-<main id="girl-main" class="main-set container">
+<main id="girl-main" class="main-set container <?php ninja_class();?>">

@@ -2,10 +2,6 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
-add_action( 'girl_meta', function() {
-        
-    
-});
 add_action( 'wp_enqueue_scripts', function() {
     /**
      * Get Photo 

@@ -56,6 +56,20 @@ if ( !class_exists( 'Girl_Content' ) ) {
             $out .= ob_get_clean();
             return $out;
         }
+        public function Swiper( $att )
+        {
+            global $pageds;
+            
+            $Query = new WP_Query( array(
+                'post_type' => $att['post_type'],
+                'posts_per_page' => $att['per_page'],
+                'paged' => $att['paged'],
+                'post_status' => 'publish',
+                'cat' => ( !empty( $att['cat'] ) ) ? absint( $att['cat'] ) : NULL,
+                'tag_id' => ( !empty( $att['tag'] ) ) ? absint( $att['tag'] ) : NULL,
+            ) );
+            
+        }
     }
 }
 $getContent = new Girl_Content;
