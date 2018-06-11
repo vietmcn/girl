@@ -24,44 +24,21 @@
  * @subpackage Girl
  * @since Girl 1.0
  */
-/**
- * Defined Import Folder 
- *
- * @since 1.0
- */
-
 if ( ! defined( 'N_EXTEND_FOLDER' ) ) {
+	/**
+	 * Defined Import Folder 
+	 *
+	 * @since 1.0
+	 */
 	define( 'N_EXTEND_FOLDER', __DIR__ );
 }
 /**
- * Crate function import_template
- *
- * @since 1.0
- */
-if ( ! function_exists( 'import_template' ) ) {
-	function import_template( $name = NULL ) 
-	{
-		$inc = 'includes';
-		$template = 'help-functions/template';
-		require_once ( N_EXTEND_FOLDER .'/'.$inc.'/'.$template.'/'.$name.'.php' );
-	}
-}
-if ( !function_exists( '__render' ) ) {
-	function __render( $att = NULL )
-	{
-		echo $att;
-	}
-} 
-/**
  * GET the Version Template
- *
+ * @author trangfox
  * @since 1.0
  */
 $theme       = wp_get_theme( 'girl' );
 $ver         = $theme['Version'];
 
-/**
- * Import includes
- * @since 1.0
- */
-require_once 'includes/config.php';
+require_once 'includes/bootstrap.php'; //Config
+require_once 'includes/_temp.php'; //_temp

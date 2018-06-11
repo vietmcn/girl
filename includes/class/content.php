@@ -16,8 +16,8 @@ if ( !class_exists( 'Girl_Content' ) ) {
                 'posts_per_page' => $att['per_page'],
                 'paged' => $att['paged'],
                 'post_status' => 'publish',
-                'cat' => ( get_query_var( $att['cat'] ) )  ? absint( get_query_var( $att['cat'] ) ) : NULL,
-                'tag_id' => ( get_query_var( $att['tag_id'] ) ) ? absint( get_query_var( $att['tag_id'] ) ) : NULL,
+                'cat' => ( !empty( $att['cat'] ) ) ? absint( $att['cat'] ) : NULL,
+                'tag_id' => ( !empty( $att['tag'] ) ) ? absint( $att['tag'] ) : NULL,
             ) );
             ob_start();
             $out  = '<ul id="list-thumbnail">';

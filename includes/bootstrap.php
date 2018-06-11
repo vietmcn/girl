@@ -2,21 +2,11 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
-/**
- * Import Class
- * @since 1.0
- * @author Trangfox
- */
-require_once 'class/mobile-detect.php'; //check device
 require_once 'class/admin/_config.php'; //config admin
+require_once 'class/mobile-detect.php'; //check device
 require_once 'class/content.php'; //Get content;
 require_once 'class/paged.php'; //Config paged
 require_once 'class/structured.php'; //Config SEO
-/**
- * import functions
- * @since 1.0
- */
-require_once 'help-functions/req.php';
 
 /**
  * 
@@ -168,3 +158,22 @@ if (!function_exists( 'disable_emojis_remove_dns_prefetch' ) ) {
         return $urls;
     }
 }
+/**
+ * Crate function import_commp
+ * @author trangfox
+ * @since 1.0
+ */
+if ( ! function_exists( 'import_commp' ) ) {
+	function import_commp( $name = NULL ) 
+	{
+		$inc = 'includes';
+		$commp = 'commp';
+		require_once ( N_EXTEND_FOLDER .'/'.$inc.'/'.$commp.'/'.$name.'.php' );
+	}
+}
+if ( !function_exists( '__render' ) ) {
+	function __render( $att = NULL )
+	{
+		echo $att;
+	}
+} 

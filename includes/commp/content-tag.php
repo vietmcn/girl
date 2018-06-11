@@ -11,7 +11,7 @@ add_action( 'girl_archive', function(){
             'post_type' => 'photo',
             'per_page' => '10',
             'paged' =>  $paged,
-            'tag_id' => get_query_var( 'tag_id' ),
+            'tag' => absint( get_query_var( 'tag_id' ) ),
             'cat' => '',
         ] );
         $out .= '</div>';
