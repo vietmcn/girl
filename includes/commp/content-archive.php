@@ -10,6 +10,7 @@ add_action( 'girl_archive', function(){
         $paged = ( get_query_var( 'page_cat' ) ) ? get_query_var( 'page_cat' ) : 1;
         
         $out  = '<section id="content" class="container">';
+        $out .= ninja_filter_header();
         $out .= $getContent::Content( [
             'post_type' => 'photo',
             'per_page' => '10',

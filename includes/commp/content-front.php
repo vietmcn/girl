@@ -2,12 +2,6 @@
 if ( !defined('ABSPATH') ) {
     exit;
 }
-if ( !function_exists( 'girl_swiper' ) ) {
-    function girl_swiper()
-    {
-        return 'hello world';
-    }
-}
 if ( !function_exists( 'girl_content' ) ) {
     function girl_content()
     {
@@ -34,7 +28,7 @@ add_action( 'girl_page', function() {
         $out  = '<section id="content" class="container">';
         if ( $mobile->isTablet() || ! $mobile->isMobile() ) {
             $out .= ninja_filter_header();
-            $out .=  girl_swiper();
+            $out .=  girl_content();
         } else {
             $out .= girl_content();
         }

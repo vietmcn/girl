@@ -103,7 +103,7 @@ add_action( 'wp_enqueue_scripts', function() {
 	 */
 	wp_enqueue_style( 'font', '//fonts.googleapis.com/css?family=Quicksand:400,500,700', ''. $ver );
 	//icon
-	#wp_enqueue_script( 'icon', '//unpkg.com/ionicons@4.1.1/dist/ionicons.js', array('jquery'), true );
+	wp_enqueue_script( 'icon', '//unpkg.com/ionicons@4.1.1/dist/ionicons.js', array('jquery'), true );
 } );
 
 add_action( 'init', 'disable_emojis' );
