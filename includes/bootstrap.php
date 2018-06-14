@@ -7,6 +7,7 @@ require_once 'class/mobile-detect.php'; //check device
 require_once 'class/content.php'; //Get content;
 require_once 'class/paged.php'; //Config paged
 require_once 'class/structured.php'; //Config SEO
+require_once 'class/menu.php'; //Config SEO
 
 /**
  * 
@@ -184,5 +185,24 @@ if ( !function_exists( 'ninja_class' ) ) {
 		if ( $mobile->isTablet() || ! $mobile->isMobile() ) {
 			__render( 'flex' );
 		}
+	}
+}
+if ( !function_exists( 'ninja_menu_current' ) ) {
+	function ninja_menu_current( $url )
+	{
+		$pagenum_link = html_entity_decode( get_pagenum_link() );
+		$url_parts    = explode( '?', $pagenum_link );
+		
+		if ( isset( $url_parts[1] ) ) {
+			if ( $url_parts[1] == $url ){
+				return 'current';
+			}
+		} else {
+			if ( $url_parts[0] == $url ) {
+				return 'current';
+			}
+		}
+		
+		return 'no-current';
 	}
 }

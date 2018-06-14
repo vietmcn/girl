@@ -1,6 +1,8 @@
 // out: ../css/screenlarge.min.css, compress: true, sourceMap: false
 html,body {
-    height: 100%;
+    @media only screen and ( max-width: 1024px ) {
+        height: 100%;
+    }
 }
 body {
     background-image: url('../img/bg.png');
@@ -11,8 +13,11 @@ body {
         justify-content: center;
         width: 100%;
         min-height: 599px;
-        height: 100%;
         margin: auto;
+        @media only screen and ( min-width: 1025px ) {
+            height: 100%;
+            margin: 3rem auto;
+        }
     }
 }
 .container {
@@ -210,12 +215,17 @@ body {
                     text-decoration: none;
                     color: #8c97b2;
                     margin: 0 5px; 
+                    font-size: 13px;
+                    cursor: pointer;
                 }
-                a:hover,a.active {
+                a:hover,a.current {
                     background: #97b3ce;
                     border-radius: 30px;
                     color: #fff;
-                    font-weight: 500;
+                    //font-weight: 500;
+                }
+                a.current {
+                    pointer-events: none;
                 }
             }
             .filter-search {
@@ -258,22 +268,24 @@ body {
         ul {
             padding: 20px 10px;
             margin: 0;
-            max-height: 590px;
             @media only screen and ( max-width: 1024px ) {
                 max-height: 545px;
+                overflow-y: auto;
             }
-            overflow-y: auto;
-            height: 100%;
             li {
                 display: inline-flex;
                 display: -webkit-inline-flex;
-                width: 100/5%;
+                width: 100/4%;
                 flex-direction: column;
                 padding: 0 10px;
-                margin-bottom: 15px;
+                margin-bottom: 2rem;
+                position: relative;
                 figure {
                     margin: 0px;
-                    height: 215px;
+                    height: 300px;
+                    @media only screen and ( max-width: 1024px ) {
+                        height: 240px;
+                    }
                     img {
                         object-fit: cover;
                         object-position: top;
@@ -284,17 +296,69 @@ body {
                     }
                 }
                 h2 {
-                    font-size: 13px;
-                    font-weight: 400;
+                    font-size: 14px;
+                    margin-bottom: 5px;
+                    font-weight: 500;
+                    line-height: 18px;
+                    @media only screen and ( max-width: 1024px ) {
+                        font-size: 12px;
+                    }
                     a {
                         color: #444c63;
                         text-decoration: none;
                     }
                 }
                 .meta {
-                    font-size: 12px;
+                    font-size: 13px;
+                    .count {
+                        position: absolute;
+                        top: 0px;
+                        background: #15a4fa;
+                        color: #fff;
+                        padding: 5px;
+                        -webkit-border-top-left-radius: 6px;
+                        -moz-border-radius-topleft: 6px;
+                        border-top-left-radius: 6px;
+                    }
+                    .tag {
+                        margin-right: 5px;
+                        a {
+                            color: #444c63;
+                            text-decoration: none;
+                        }
+                    }
                 }
             }
+        }
+    }
+    /*=======================================
+        content-single
+    ======================================*/
+    #picbox {
+        width: 80%;
+        background: #fff;
+        padding: 10px;
+    }
+    /*=======================================
+        paged
+    ======================================*/
+    .custom-pagination {
+        height: 50px;
+        align-items: center;
+        justify-content: center;
+        a,span {
+            color: #fff;
+            padding: 10px;
+        }
+        .disable {
+            background: #303649;
+        }
+        .count-paged {
+            background: #181e2d;
+        }
+        a {
+            background: #15a4fa;
+            text-decoration: none;
         }
     }
     /*=======================================

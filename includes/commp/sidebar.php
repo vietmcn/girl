@@ -27,6 +27,7 @@ if ( !function_exists( 'ninja_sidebar_nav' ) ) {
     {
         $out  = '<div class="sidebar-menu">';
         $out .= '<ul>';
+        $out .= '<li class="browse"><a class="flex" href="#"><ion-icon name="aperture"></ion-icon>Studio</a></li>';
         $out .= '<li class="browse"><a class="active flex" href="/"><ion-icon name="globe"></ion-icon>Browse</a></li>';
         $out .= '<li class="browse"><a class="flex" href="#"><ion-icon name="cloud-download"></ion-icon>Download</a></li>';
         $out .= '<li class="browse"><a class="flex" href="#"><ion-icon name="stopwatch"></ion-icon>History</a></li>';
@@ -53,6 +54,7 @@ if ( !function_exists( 'ninja_sidebar_cat' ) ) {
 }
 add_action( 'girl_page',    'ninja_sidebar' );
 add_action( 'girl_archive', 'ninja_sidebar' );
+add_action( 'girl_single',  'ninja_sidebar' );
 if ( !function_exists( 'ninja_sidebar' ) ) {
     function ninja_sidebar() 
     {

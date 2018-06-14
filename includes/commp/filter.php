@@ -2,20 +2,34 @@
 if (!defined( 'ABSPATH' ) ) {
     exit;
 }
+function ninja_filter_header_menu()
+{   
+    global $custom_menu;
+
+    $out = $custom_menu->menu([
+        'name' => 'ALL Photo',
+        'link' => get_bloginfo('url').'/',
+    ]);
+    $out .= $custom_menu->menu([
+        'name' => 'Most View',
+        'query' => 'view=desc',
+        'link' => './?view=desc',
+    ]);
+    return $out;
+}
 if ( !function_exists( 'ninja_filter_header' ) ) {
     function ninja_filter_header( $att = array() )
     {
         global $mobile;
         if ( $mobile->isTablet() || ! $mobile->isMobile() ) {
+
             $out  = '<aside ninja-filter class="filter">';
             $out .= '<div class="header-title flex">';
             $out .= '<h3>Browse Available Gallery</h3>';
             $out .= '</div>';
             $out .= '<div class="filter-bottom flex">';
             $out .= '<div class="filter-button">';
-            $out .= '<a href="/" class="active">All Photo</a>';
-            $out .= '<a href="#">Most Recent</a>';
-            $out .= '<a href="#">Most Popular</a>';
+            $out .= ninja_filter_header_menu();
             $out .= '</div>';
             $out .= '<div class="filter-search">';
             $out .= '<gcse:search></gcse:search>';
@@ -23,6 +37,7 @@ if ( !function_exists( 'ninja_filter_header' ) ) {
             $out .= '</div>';
             $out .= '</aside>';
             return $out;
+            
         }
     }
 }

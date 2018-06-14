@@ -84,7 +84,7 @@ if ( ! class_exists( 'App_paged' ) ) :
 
             if ( $args['current'] == $args['total'] ) {
 
-                if ( $args['current'] >= 2 && $args['current'] < $args['total'] || $args['current'] == $args['total'] && $args['total'] > 2 ) {
+                if ( $args['current'] >= 2 && $args['current'] < $args['total'] || $args['current'] == $args['total'] && $args['total'] >= 2 ) {
 
                     $prev = '<a href="'.esc_url( $link_prev ).'">'.$args['prev_text'].'</a>';
                     

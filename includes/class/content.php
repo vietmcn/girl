@@ -16,6 +16,8 @@ if ( !class_exists( 'Girl_Content' ) ) {
                 'posts_per_page' => $att['per_page'],
                 'paged' => $att['paged'],
                 'post_status' => 'publish',
+                'orderby' => ( !empty( $att['orderby_view'] ) ) ? esc_attr( $att['orderby_view'] ) : 'date',
+                'order' => 'DESC',
                 'cat' => ( !empty( $att['cat'] ) ) ? absint( $att['cat'] ) : NULL,
                 'tag_id' => ( !empty( $att['tag'] ) ) ? absint( $att['tag'] ) : NULL,
             ) );
@@ -25,7 +27,8 @@ if ( !class_exists( 'Girl_Content' ) ) {
             if ( $Query->have_posts() ) {
         
                 while ( $Query->have_posts() ) : $Query->the_post();
-        
+
+                    $tag = get_the_tags( $Query->post->ID );
                     $meta = get_post_meta( $Query->post->ID, '_meta_thumbnail', true );
                     
                     $out .= '<li data-id="'.$Query->post->ID.'" class="thumbnail-class">';
@@ -40,7 +43,8 @@ if ( !class_exists( 'Girl_Content' ) ) {
                     }
                     $out .= '<div class="meta flex">';
                     $out .= '<span class="count">'.$meta['meta_count'].'pic</span>';
-                    $out .= '<time datetime="'.get_the_date('c', $Query->post->ID ).'">'.get_the_date().'</time>';
+                    $out .= '<span class="tag"><a href="'.get_tag_link( $tag[0]->term_id ).'" title="'.$tag[0]->name.'">['.$tag[0]->name.']</a> -</span>';
+                    $out .= '<time datetime="'.get_the_date('c', $Query->post->ID ).'">'.human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago</time>';
                     $out .= '</div>';
                     $out .= '</li>';
                     

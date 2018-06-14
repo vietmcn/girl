@@ -42,9 +42,11 @@ add_action( 'girl_header', function() {
         if ( is_home() || is_front_page() ) {
             $title = 'Photo Gallery';
         } elseif ( is_category() ) {
-            $title = get_cat_name( get_query_var( 'cat' ) );
+            $title = 'Photo '.get_cat_name( get_query_var( 'cat' ) );
+        } elseif ( is_single() || is_singular() ) {
+            $title = 'View Gallery'; 
         } else {
-            $title = 'No';
+            $title = 'Not Found!';
         }
         $out  = '<div class="flex logo-desktop">';
         $out .= '<div class="left"></div>';
